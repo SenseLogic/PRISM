@@ -303,8 +303,6 @@ class TRACKING
                 line = line_array[ line_index ].stripRight();
                 trimmed_line = line.stripLeft();
 
-                writeln( "[", ( line_index + 1 ).to!string(), "] ", line );
-
                 if ( line != "" )
                 {
                     if ( line.startsWith( '=' ) )
@@ -323,7 +321,7 @@ class TRACKING
                         }
                         else
                         {
-                            Abort( "Invalid week line" );
+                            Abort( "Invalid week syntax", line, line_index );
                         }
                     }
                     else if ( trimmed_line.startsWith( '-' ) )
@@ -368,37 +366,39 @@ class TRACKING
                                             else
                                             {
 
-                                                Abort( "Invalid task time : " ~ task_time );
+                                                Abort( "Invalid task syntax : " ~ task_time, line, line_index );
                                             }
 
                                             weekday_index = GetWeekdayIndex( weekday_name );
 
-                                            if ( project_name != ""
-                                                 && developer_name != ""
-                                                 && weekday_index >= 0 )
+                                            if ( developer_name == "" )
+                                            {
+                                                Abort( "Missing developer name", line, line_index );
+                                            }
+                                            else if ( project_name == "" )
+                                            {
+                                                Abort( "Missing project name", line, line_index );
+                                            }
+                                            else if ( weekday_index < 0 )
+                                            {
+                                                Abort( "Invalid weekday name", line, line_index );
+                                            }
+                                            else
                                             {
                                                 task_date = GetIncrementedDate( monday_date, weekday_index );
 
                                                 AddTask( developer_name, project_name, module_name, task_name, task_date, task_duration );
                                             }
-                                            else
-                                            {
-                                                writeln( "Project name : ", project_name );
-                                                writeln( "Developer name : ", developer_name );
-                                                writeln( "Weekday name : ", weekday_name );
-
-                                                Abort( "Invalid task line" );
-                                            }
                                         }
                                     }
                                     else
                                     {
-                                        Abort( "Invalid task line" );
+                                        Abort( "Invalid task syntax", line, line_index );
                                     }
                                 }
                                 else
                                 {
-                                    Abort( "Invalid task line" );
+                                    Abort( "Invalid task syntax", line, line_index );
                                 }
                             }
                         }
@@ -481,19 +481,19 @@ class TRACKING
         TaskArray.sort!(
             ( a, b )
             {
-                if ( a.Date_ != b.Date_ ) 
+                if ( a.Date_ != b.Date_ )
                 {
                     return a.Date_ < b.Date_;
                 }
-                else if ( a.Developer.Name != b.Developer.Name ) 
+                else if ( a.Developer.Name != b.Developer.Name )
                 {
                     return a.Developer.Name < b.Developer.Name;
                 }
-                else if ( a.Project.Name != b.Project.Name ) 
+                else if ( a.Project.Name != b.Project.Name )
                 {
                     return a.Project.Name < b.Project.Name;
                 }
-                else if ( a.ModuleName != b.ModuleName ) 
+                else if ( a.ModuleName != b.ModuleName )
                 {
                     return a.ModuleName < b.ModuleName;
                 }
@@ -803,6 +803,19 @@ void Abort(
     PrintError( exception.msg );
 
     exit( -1 );
+}
+
+// ~~
+
+void Abort(
+    string message,
+    string line,
+    long line_index
+    )
+{
+    writeln( "[", ( line_index + 1 ).to!string(), "] ", line );
+
+    Abort( message );
 }
 
 // ~~
