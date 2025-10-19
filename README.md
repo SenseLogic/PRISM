@@ -2,9 +2,53 @@
 
 # Prism
 
-Weekly summary compiler.
+Planning and weekly summary compiler.
 
-# Sample
+# Sample planning
+
+```
+= John
+= Mike
+= Jack
+= Mark
+= Paul
+= Luke
+
+E-commerce Platform
+- Implement user authentication API (John 100%) : 16h
+- Set up payment gateway integration (John 80% #1) : 8h
+- Implement shopping cart functionality (John #1) : 16h
+- Add order history tracking (John #1) : 8h
+- Implement product recommendations (John #2) : 16h
+- Add customer review system (John #2) : 8h
+- Implement loyalty program (John #3) : 16h
+- Add social commerce features (John #3) : 8h
+- Implement marketplace integration (John) : 16h
+- Add subscription management (John) : 8h
+- Implement advanced payment methods (John) : 16h
+- Add customer analytics dashboard (John) : 8h
+
+Inventory Management System
+- Create product catalog API (John 100%) : 2h
+- Backend :
+  - Build order processing service (John 100%) : 16h
+  - Implement stock tracking endpoints (John 100%) : 8h
+- Frontend :
+  - Design admin dashboard layout (John 100%) : 1h
+  - Add product search functionality (John 100%) : 16h
+- Build real-time inventory updates (John #1) : 8h
+- Create reporting dashboard (John #1) : 16h
+- Build automated reorder system (John #2) : 8h
+- Create supplier management (John #2) : 16h
+- Build demand forecasting (John #3) : 8h
+- Create quality control system (John #3) : 16h
+- Build vendor portal (John) : 16h
+- Create compliance tracking (John) : 8h
+- Implement inventory optimization (John) : 16h
+- Add barcode scanning system (John) : 8h
+```
+
+# Sample weekly summary
 
 ```
 === John ===

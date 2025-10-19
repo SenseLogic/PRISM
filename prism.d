@@ -67,6 +67,8 @@ class PROJECT
         Duration;
     long[ DEVELOPER ]
         DurationByDeveloperMap;
+    TASK[]
+        TaskArray;
 
     // -- CONSTRUCTORS
 
@@ -89,7 +91,8 @@ class TASK
     PROJECT
         Project;
     string
-        ModuleName;
+        ModuleName,
+        GroupName;
     DEVELOPER
         Developer;
     Date
@@ -98,6 +101,10 @@ class TASK
         Name;
     long
         Duration;
+    string
+        State;
+    TASK[]
+        SubtaskArray;
 
     // -- CONSTRUCTORS
 
@@ -105,6 +112,7 @@ class TASK
         DEVELOPER developer,
         PROJECT project,
         string module_name,
+        string group_name,
         string name,
         Date date,
         long duration
@@ -113,6 +121,7 @@ class TASK
         this.Developer = developer;
         this.Project = project;
         this.ModuleName = module_name;
+        this.GroupName = group_name;
         this.Name = name;
         this.Date_ = date;
         this.Duration = duration;
@@ -127,6 +136,8 @@ class TASK
             Project.Name,
             ", ",
             ModuleName,
+            ", ",
+            GroupName,
             ", ",
             Developer.Name,
             ", ",
@@ -228,6 +239,7 @@ class TRACKING
         string developer_name,
         string project_name,
         string module_name,
+        string group_name,
         string task_name,
         Date task_date,
         long task_duration
@@ -242,7 +254,7 @@ class TRACKING
 
         developer = GetDeveloper( developer_name );
         project = GetProject( project_name );
-        task = new TASK( developer, project, module_name, task_name, task_date, task_duration );
+        task = new TASK( developer, project, module_name, group_name, task_name, task_date, task_duration );
 
         TaskArray ~= task;
 
@@ -271,6 +283,7 @@ class TRACKING
             weekday_index;
         string
             developer_name,
+            group_name,
             module_name,
             line,
             project_name,
@@ -288,112 +301,122 @@ class TRACKING
 
         week_date_text = input_file_path.GetFileLabel().replace( '_', '-' );
 
-        if ( week_date_text.length >= 10
-             && IsDateText( week_date_text[ 0 .. 10 ] ) )
+        monday_date = GetMondayDate( week_date_text[ 0 .. 10 ] );
+
+        line_array = input_file_path.ReadText().replace( "\r", "" ).replace( "\t", "    " ).split( '\n' );
+        it_is_this_week = false;
+
+        for ( line_index = 0;
+              line_index < line_array.length;
+              ++line_index )
         {
-            monday_date = GetMondayDate( week_date_text[ 0 .. 10 ] );
+            line = line_array[ line_index ].stripRight();
+            trimmed_line = line.stripLeft();
 
-            line_array = input_file_path.ReadText().replace( "\r", "" ).replace( "\t", "    " ).split( '\n' );
-            it_is_this_week = false;
-
-            for ( line_index = 0;
-                  line_index < line_array.length;
-                  ++line_index )
+            if ( trimmed_line != "" )
             {
-                line = line_array[ line_index ].stripRight();
-                trimmed_line = line.stripLeft();
-
-                if ( line != "" )
+                if ( line.startsWith( '=' ) )
                 {
-                    if ( line.startsWith( '=' ) )
-                    {
-                        developer_name = line.replace( "=", "" ).strip();
-                    }
-                    else if ( line.startsWith( "#" ) )
-                    {
-                        if ( line == "# This week" )
-                        {
-                            it_is_this_week = true;
-                        }
-                        else if ( line == "# Next week" )
-                        {
-                            it_is_this_week = false;
-                        }
-                        else
-                        {
-                            Abort( "Invalid week syntax", line, line_index );
-                        }
-                    }
-                    else if ( trimmed_line.startsWith( '-' ) )
-                    {
-                        if ( it_is_this_week )
-                        {
-                            if ( line.startsWith( '-' ) )
-                            {
-                                module_name = "";
-                            }
+                    developer_name = line.replace( "=", "" ).strip();
 
-                            if ( line.startsWith( '-' )
-                                 && line.endsWith( ':' ) )
-                            {
-                                module_name = line[ 1 .. $ - 1 ].strip();
-                            }
-                            else if ( line.endsWith( ')' ) )
-                            {
-                                parenthesis_character_index = trimmed_line.lastIndexOf( '(' );
+                    if ( developer_name == "" )
+                    {
+                        Abort( "Missing developer name", line, line_index );
+                    }
 
-                                if ( parenthesis_character_index >= 0 )
+                    it_is_this_week = false;
+                }
+                else if ( line.startsWith( "#" ) )
+                {
+                    if ( line == "# This week" )
+                    {
+                        it_is_this_week = true;
+                    }
+                    else if ( line == "# Next week" )
+                    {
+                        it_is_this_week = false;
+                    }
+                    else
+                    {
+                        Abort( "Invalid week syntax", line, line_index );
+                    }
+                }
+                else if ( trimmed_line.startsWith( '-' ) )
+                {
+                    if ( it_is_this_week )
+                    {
+                        if ( line.startsWith( '-' ) )
+                        {
+                            module_name = "";
+                            group_name = "";
+                        }
+
+                        if ( line.startsWith( "  -" ) )
+                        {
+                            group_name = "";
+                        }
+
+                        if ( line.startsWith( '-' )
+                             && line.endsWith( ':' ) )
+                        {
+                            module_name = line[ 1 .. $ - 1 ].strip();
+                        }
+                        else if ( line.startsWith( "  -" )
+                                  && line.endsWith( ':' ) )
+                        {
+                            group_name = line[ 3 .. $ - 1 ].strip();
+                        }
+                        else if ( line.endsWith( ')' ) )
+                        {
+                            parenthesis_character_index = trimmed_line.lastIndexOf( '(' );
+
+                            if ( parenthesis_character_index >= 0 )
+                            {
+                                task_name = trimmed_line[ 1 .. parenthesis_character_index ].strip();
+                                task_time_array = trimmed_line[ parenthesis_character_index + 1 .. $ - 1 ].split( ',' );
+
+                                if ( task_time_array.length > 0 )
                                 {
-                                    task_name = trimmed_line[ 1 .. parenthesis_character_index ].strip();
-                                    task_time_array = trimmed_line[ parenthesis_character_index + 1 .. $ - 1 ].split( ',' );
-
-                                    if ( task_time_array.length > 0 )
+                                    foreach ( task_time; task_time_array )
                                     {
-                                        foreach ( task_time; task_time_array )
+                                        part_array = task_time.strip().split( ' ' );
+
+                                        if ( part_array.length == 1 )
                                         {
-                                            part_array = task_time.strip().split( ' ' );
-
-                                            if ( part_array.length == 1 )
-                                            {
-                                                weekday_name = part_array[ 0 ];
-                                                task_duration = 0;
-                                            }
-                                            else if ( part_array.length == 2 )
-                                            {
-                                                weekday_name = part_array[ 0 ];
-                                                task_duration = GetDuration( part_array[ 1 ] );
-                                            }
-                                            else
-                                            {
-
-                                                Abort( "Invalid task syntax : " ~ task_time, line, line_index );
-                                            }
-
-                                            weekday_index = GetWeekdayIndex( weekday_name );
-
-                                            if ( developer_name == "" )
-                                            {
-                                                Abort( "Missing developer name", line, line_index );
-                                            }
-                                            else if ( project_name == "" )
-                                            {
-                                                Abort( "Missing project name", line, line_index );
-                                            }
-                                            else if ( weekday_index < 0 )
-                                            {
-                                                Abort( "Invalid weekday name", line, line_index );
-                                            }
-                                            else
-                                            {
-                                                task_date = GetIncrementedDate( monday_date, weekday_index );
-
-                                                AddTask( developer_name, project_name, module_name, task_name, task_date, task_duration );
-                                            }
+                                            weekday_name = part_array[ 0 ];
+                                            task_duration = 0;
                                         }
-                                    }
-                                    else
-                                    {
-                                        Abort( "Invalid task syntax", line, line_index );
+                                        else if ( part_array.length == 2 )
+                                        {
+                                            weekday_name = part_array[ 0 ];
+                                            task_duration = GetDuration( part_array[ 1 ] );
+                                        }
+                                        else
+                                        {
+
+                                            Abort( "Invalid task syntax : " ~ task_time, line, line_index );
+                                        }
+
+                                        weekday_index = GetWeekdayIndex( weekday_name );
+
+                                        if ( developer_name == "" )
+                                        {
+                                            Abort( "Missing developer name", line, line_index );
+                                        }
+                                        else if ( project_name == "" )
+                                        {
+                                            Abort( "Missing project name", line, line_index );
+                                        }
+                                        else if ( weekday_index < 0 )
+                                        {
+                                            Abort( "Invalid weekday name", line, line_index );
+                                        }
+                                        else
+                                        {
+                                            task_date = GetIncrementedDate( monday_date, weekday_index );
+
+                                            AddTask( developer_name, project_name, module_name, group_name, task_name, task_date, task_duration );
+                                        }
                                     }
                                 }
                                 else
@@ -401,33 +424,34 @@ class TRACKING
                                     Abort( "Invalid task syntax", line, line_index );
                                 }
                             }
+                            else
+                            {
+                                Abort( "Invalid task syntax", line, line_index );
+                            }
                         }
                     }
-                    else
-                    {
-                        project_name = line;
-                    }
+                }
+                else
+                {
+                    project_name = trimmed_line;
                 }
             }
-        }
-        else
-        {
-            Abort( "Invalid file name" );
         }
     }
 
     // ~~
 
     void ReadFiles(
-        string input_folder_path
         )
     {
+        string
+            input_file_label;
         string[]
             input_file_path_array;
 
-        writeln( "Reading folder : ", input_folder_path );
+        writeln( "Reading folder : ", InputFolderPath );
 
-        foreach ( input_folder_entry; input_folder_path.dirEntries( SpanMode.shallow ) )
+        foreach ( input_folder_entry; InputFolderPath.dirEntries( SpanMode.shallow ) )
         {
             if ( input_folder_entry.isFile )
             {
@@ -439,10 +463,19 @@ class TRACKING
 
         foreach ( input_file_path; input_file_path_array )
         {
-            if ( input_file_path.startsWith( input_folder_path )
+            if ( input_file_path.startsWith( InputFolderPath )
                  && input_file_path.endsWith( ".md" ) )
             {
-                ReadFile( input_file_path );
+                input_file_label = input_file_path.GetFileLabel();
+
+                if ( !input_file_label.matchFirst( WeeklySummaryFileLabelRegularExpression ).empty )
+                {
+                    ReadFile( input_file_path );
+                }
+                else if ( input_file_label != "planning" )
+                {
+                    Abort( "Invalid file name : " ~ input_file_path );
+                }
             }
         }
     }
@@ -745,14 +778,302 @@ class TRACKING
     // ~~
 
     void WriteFiles(
-        string output_folder_path
         )
     {
-        WriteDeveloperFile( output_folder_path ~ "developer.tsv" );
-        WriteDeveloperProjectFile( output_folder_path ~ "developer_project.tsv" );
-        WriteProjectFile( output_folder_path ~ "project.tsv" );
-        WriteProjectDeveloperFile( output_folder_path ~ "project_developer.tsv" );
-        WriteTaskFile( output_folder_path ~ "task.tsv" );
+        WriteDeveloperFile( OutputFolderPath ~ "developer.tsv" );
+        WriteDeveloperProjectFile( OutputFolderPath ~ "developer_project.tsv" );
+        WriteProjectFile( OutputFolderPath ~ "project.tsv" );
+        WriteProjectDeveloperFile( OutputFolderPath ~ "project_developer.tsv" );
+        WriteTaskFile( OutputFolderPath ~ "task.tsv" );
+    }
+}
+
+// ~~
+
+class PLANNING
+{
+    // -- ATTRIBUTES
+
+    DEVELOPER[]
+        DeveloperArray;
+    DEVELOPER[ string ]
+        DeveloperByNameMap;
+    PROJECT[]
+        ProjectArray;
+    PROJECT[ string ]
+        ProjectByNameMap;
+    TASK[]
+        TaskArray;
+    TASK[][ Date ]
+        TaskArrayByDateMap;
+    long
+        Duration;
+
+    // -- CONSTRUCTORS
+
+    this(
+        )
+    {
+        DeveloperArray = [];
+        DeveloperByNameMap = null;
+        ProjectArray = [];
+        ProjectByNameMap = null;
+        TaskArray = [];
+        TaskArrayByDateMap = null;
+        Duration = 0;
+    }
+
+    // -- OPERATIONS
+
+    bool HasDeveloper(
+        string developer_name
+        )
+    {
+        return ( developer_name in DeveloperByNameMap ) !is null;
+    }
+
+    // ~~
+
+    DEVELOPER AddDeveloper(
+        string developer_name
+        )
+    {
+        DEVELOPER
+            developer;
+
+        developer = new DEVELOPER( developer_name );
+
+        DeveloperArray ~= developer;
+        DeveloperByNameMap[ developer_name ] = developer;
+
+        return developer;
+    }
+
+    // ~~
+
+    DEVELOPER GetDeveloper(
+        string developer_name
+        )
+    {
+        return DeveloperByNameMap[ developer_name ];
+    }
+
+    // ~~
+
+    bool HasProject(
+        string project_name
+        )
+    {
+        return ( project_name in ProjectByNameMap ) !is null;
+    }
+
+    // ~~
+
+    PROJECT GetProject(
+        string project_name
+        )
+    {
+        return ProjectByNameMap[ project_name ];
+    }
+
+    // ~~
+
+    PROJECT AddProject(
+        string project_name
+        )
+    {
+        PROJECT
+            project;
+
+        project = new PROJECT( project_name );
+
+        ProjectArray ~= project;
+        ProjectByNameMap[ project_name ] = project;
+
+        return project;
+    }
+
+    // ~~
+
+    TASK AddTask(
+        string developer_name,
+        string project_name,
+        string module_name,
+        string group_name,
+        string task_name,
+        Date task_date,
+        long task_duration
+        )
+    {
+        DEVELOPER
+            developer;
+        PROJECT
+            project;
+        TASK
+            task;
+
+        developer = GetDeveloper( developer_name );
+        project = GetProject( project_name );
+        task = new TASK( developer, project, module_name, group_name, task_name, task_date, task_duration );
+
+        TaskArray ~= task;
+
+        if ( task_date !in TaskArrayByDateMap )
+        {
+            TaskArrayByDateMap[ task_date ] = [];
+        }
+
+        TaskArrayByDateMap[ task_date ] ~= task;
+
+        return task;
+    }
+
+    // ~~
+
+    void ReadFile(
+        string input_file_path
+        )
+    {
+        bool
+            it_is_this_week;
+        long
+            line_index,
+            parenthesis_character_index,
+            task_duration,
+            weekday_index;
+        string
+            developer_name,
+            group_name,
+            module_name,
+            line,
+            project_name,
+            task_name,
+            trimmed_line,
+            week_date_text,
+            weekday_name;
+        string[]
+            line_array,
+            part_array,
+            task_time_array;
+        Date
+            monday_date,
+            task_date;
+
+        line_array = input_file_path.ReadText().replace( "\r", "" ).replace( "\t", "    " ).split( '\n' );
+        it_is_this_week = false;
+
+        for ( line_index = 0;
+              line_index < line_array.length;
+              ++line_index )
+        {
+            line = line_array[ line_index ].stripRight();
+            trimmed_line = line.stripLeft();
+
+            if ( trimmed_line != "" )
+            {
+                if ( line.startsWith( '=' ) )
+                {
+                    developer_name = line[ 1 .. $ ].strip();
+
+                    if ( developer_name != ""
+                         && !HasDeveloper( developer_name ) )
+                    {
+                        AddDeveloper( developer_name );
+                    }
+                    else
+                    {
+                        Abort( "Duplicate developer name", line, line_index );
+                    }
+                }
+                else if ( trimmed_line.startsWith( '-' ) )
+                {
+                }
+                else
+                {
+                    project_name = trimmed_line;
+
+                    if ( project_name != ""
+                         && !HasProject( project_name ) )
+                    {
+                        AddProject( project_name );
+                    }
+                    else
+                    {
+                        Abort( "Duplicate project name", line, line_index );
+                    }
+                }
+            }
+        }
+    }
+
+    // ~~
+
+    void ReadFiles(
+        )
+    {
+        string[]
+            input_file_path_array;
+
+        writeln( "Reading folder : ", InputFolderPath );
+
+        foreach ( input_folder_entry; InputFolderPath.dirEntries( SpanMode.shallow ) )
+        {
+            if ( input_folder_entry.isFile )
+            {
+                input_file_path_array ~= input_folder_entry.name.GetLogicalPath();
+            }
+        }
+
+        input_file_path_array.sort();
+
+        foreach ( input_file_path; input_file_path_array )
+        {
+            if ( input_file_path.startsWith( InputFolderPath )
+                 && input_file_path.GetFileLabel() == "planning.md" )
+            {
+                ReadFile( input_file_path );
+            }
+        }
+    }
+
+    // ~~
+
+    void SortDevelopers(
+        )
+    {
+        DeveloperArray.sort!(
+            ( a, b )
+            {
+                return a.Name < b.Name;
+            }
+            );
+    }
+
+    // ~~
+
+    void SortProjects(
+        )
+    {
+        ProjectArray.sort!(
+            ( a, b )
+            {
+                return a.Name < b.Name;
+            }
+            );
+    }
+
+    // ~~
+
+    void ProcessTasks(
+        )
+    {
+    }
+
+    // ~~
+
+    void WriteFiles(
+        )
+    {
     }
 }
 
@@ -761,16 +1082,25 @@ class TRACKING
 string[]
     WeekdayNameArray = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
 Regex!char
+    RealRegularExpression = regex( r"^\d+\.?\d*$" ),
     MinuteDurationRegularExpression = regex( r"^\d+m$" ),
     HourDurationRegularExpression = regex( r"^\d+h$" ),
     HourMinuteDurationRegularExpression = regex( r"^\d+h\d+$" ),
     DayDurationRegularExpression = regex( r"^\d+\.?\d*d$" ),
-    DateTextRegularExpression = regex( r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" );
+    DateRegularExpression = regex( r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" ),
+    WeeklySummaryFileLabelRegularExpression = regex( r"^\d{4}_(0[1-9]|1[0-2])_(0[1-9]|[12]\d|3[01])$" );
 
 // -- VARIABLES
 
 long
     DayDuration = 8 * 60;
+double
+    MinimumDurationFactor,
+    MediumDurationFactor,
+    MaximumDurationFactor;
+string
+    InputFolderPath,
+    OutputFolderPath;
 
 // -- FUNCTIONS
 
@@ -820,6 +1150,15 @@ void Abort(
 
 // ~~
 
+bool IsReal(
+    string text
+    )
+{
+    return !text.matchFirst( RealRegularExpression ).empty;
+}
+
+// ~~
+
 string GetPhysicalPath(
     string path
     )
@@ -839,6 +1178,17 @@ string GetLogicalPath(
     )
 {
     return path.replace( '\\', '/' );
+}
+
+// ~~
+
+bool IsFolderPath(
+    string text
+    )
+{
+    return
+        text == ""
+        || text.GetLogicalPath().endsWith( '/' );
 }
 
 // ~~
@@ -1000,34 +1350,48 @@ string ReadText(
 
 // ~~
 
+bool IsDuration(
+    string text
+    )
+{
+    return
+        !text.matchFirst( MinuteDurationRegularExpression ).empty
+        || !text.matchFirst( HourDurationRegularExpression ).empty
+        || !text.matchFirst( HourMinuteDurationRegularExpression ).empty
+        || !text.matchFirst( DayDurationRegularExpression ).empty;
+}
+
+
+// ~~
+
 long GetDuration(
-    string duration_text
+    string text
     )
 {
     string[]
         part_array;
 
-    if ( !duration_text.matchFirst( MinuteDurationRegularExpression ).empty )
+    if ( !text.matchFirst( MinuteDurationRegularExpression ).empty )
     {
-        return duration_text[ 0 .. $ - 1 ].to!long();
+        return text[ 0 .. $ - 1 ].to!long();
     }
-    else if ( !duration_text.matchFirst( HourDurationRegularExpression ).empty )
+    else if ( !text.matchFirst( HourDurationRegularExpression ).empty )
     {
-        return duration_text[ 0 .. $ - 1 ].to!long() * 60;
+        return text[ 0 .. $ - 1 ].to!long() * 60;
     }
-    else if ( !duration_text.matchFirst( HourMinuteDurationRegularExpression ).empty )
+    else if ( !text.matchFirst( HourMinuteDurationRegularExpression ).empty )
     {
-        part_array = duration_text.split( 'h' );
+        part_array = text.split( 'h' );
 
         return part_array[ 0 ].to!long() * 60 + part_array[ 1 ].to!long();
     }
-    else if ( !duration_text.matchFirst( DayDurationRegularExpression ).empty )
+    else if ( !text.matchFirst( DayDurationRegularExpression ).empty )
     {
-        return ( duration_text[ 0 .. $ - 1 ].to!double() * DayDuration.to!double() + 0.5 ).to!long();
+        return ( text[ 0 .. $ - 1 ].to!double() * DayDuration.to!double() + 0.5 ).to!long();
     }
     else
     {
-        Abort( "Invalid duration : " ~ duration_text );
+        Abort( "Invalid duration : " ~ text );
 
         return 0;
     }
@@ -1053,20 +1417,20 @@ string GetWeekdayName(
 
 // ~~
 
-bool IsDateText(
-    string date_text
+bool IsDate(
+    string text
     )
 {
-    return !date_text.matchFirst( DateTextRegularExpression ).empty;
+    return !text.matchFirst( DateRegularExpression ).empty;
 }
 
 // ~~
 
 Date GetDate(
-    string date_text
+    string text
     )
 {
-    return Date.fromISOExtString( date_text );
+    return Date.fromISOExtString( text );
 }
 
 // ~~
@@ -1133,30 +1497,47 @@ void main(
     string[] argument_array
     )
 {
+    PLANNING
+        planning;
     TRACKING
         tracking;
 
     argument_array = argument_array[ 1 .. $ ];
 
-    if ( argument_array.length == 3
-         && argument_array[ 1 ].GetLogicalPath().endsWith( '/' )
-         && argument_array[ 2 ].GetLogicalPath().endsWith( '/' ) )
+    if ( argument_array.length == 6
+         && IsDuration( argument_array[ 0 ] )
+         && IsReal( argument_array[ 1 ] )
+         && IsReal( argument_array[ 2 ] )
+         && IsReal( argument_array[ 3 ] )
+         && IsFolderPath( argument_array[ 4 ] )
+         && IsFolderPath( argument_array[ 5 ] ) )
     {
         DayDuration = GetDuration( argument_array[ 0 ] );
-        writeln( "Day duration : ", DayDuration, " minutes" );
+        MinimumDurationFactor = argument_array[ 1 ].to!double();
+        MediumDurationFactor = argument_array[ 2 ].to!double();
+        MaximumDurationFactor = argument_array[ 3 ].to!double();
+        InputFolderPath = argument_array[ 4 ].GetLogicalPath();
+        OutputFolderPath = argument_array[ 5 ].GetLogicalPath();
 
         tracking = new TRACKING();
-        tracking.ReadFiles( argument_array[ 1 ].GetLogicalPath() );
+        tracking.ReadFiles();
         tracking.SortDevelopers();
         tracking.SortProjects();
         tracking.SortTasks();
         tracking.ProcessTasks();
-        tracking.WriteFiles( argument_array[ 2 ].GetLogicalPath() );
+        tracking.WriteFiles();
+
+        planning = new PLANNING();
+        planning.ReadFiles();
+        planning.SortDevelopers();
+        planning.SortProjects();
+        planning.ProcessTasks();
+        planning.WriteFiles();
     }
     else
     {
         writeln( "Usage :" );
-        writeln( "    prism INPUT_FOLDER/ OUTPUT_FOLDER/" );
+        writeln( "    prism {workday duration} {minimum duration factor} {medium duration factor} {maximum duration factor} INPUT_FOLDER/ OUTPUT_FOLDER/" );
 
         PrintError( "Invalid arguments : " ~ argument_array.to!string() );
     }
