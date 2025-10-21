@@ -32,6 +32,209 @@ import std.string : endsWith, indexOf, join, lastIndexOf, replace, split, starts
 
 // -- TYPES
 
+class TASK
+{
+    // -- ATTRIBUTES
+
+    PROJECT
+        Project;
+    string
+        SegmentName,
+        GroupName;
+    SEGMENT
+        Segment;
+    GROUP
+        Group;
+    PHASE
+        Phase;
+    SPRINT
+        Sprint;
+    DEVELOPER
+        Developer;
+    Date
+        Date_;
+    string
+        Name;
+    bool
+        HasDuration;
+    long
+        Duration;
+    bool
+        HasCompletion;
+    long
+        Completion;
+    string
+        Status;
+    TASK[]
+        SubtaskArray;
+    long
+        Indentation;
+
+    // -- CONSTRUCTORS
+
+    this(
+        )
+    {
+    }
+
+    // ~~
+
+    this(
+        DEVELOPER developer,
+        PROJECT project,
+        string segment_name,
+        string group_name,
+        string name,
+        Date date,
+        long duration
+        )
+    {
+        Developer = developer;
+        Project = project;
+        SegmentName = segment_name;
+        GroupName = group_name;
+        Name = name;
+        Date_ = date;
+        Duration = duration;
+    }
+
+    // -- INQUIRIES
+
+    void Dump(
+        )
+    {
+        writeln(
+            Project.Name,
+            ", ",
+            SegmentName,
+            ", ",
+            GroupName,
+            ", ",
+            Developer.Name,
+            ", ",
+            GetDateText( Date_ ),
+            ", ",
+            Name,
+            ", ",
+            Duration
+            );
+    }
+}
+
+// ~~
+
+class GROUP
+{
+    // -- ATTRIBUTES
+
+    string
+        Name;
+    long
+        Duration;
+    TASK
+        Task;
+
+    // -- CONSTRUCTORS
+
+    this(
+        string name
+        )
+    {
+        Name = name;
+        Duration = 0;
+    }
+}
+
+// ~~
+
+class SEGMENT
+{
+    // -- ATTRIBUTES
+
+    string
+        Name;
+    long
+        Duration;
+    TASK
+        Task;
+    GROUP[]
+        GroupArray;
+
+    // -- CONSTRUCTORS
+
+    this(
+        string name
+        )
+    {
+        Name = name;
+        Duration = 0;
+    }
+}
+
+// ~~
+
+class PROJECT
+{
+    // -- ATTRIBUTES
+
+    string
+        Name;
+    long
+        Duration;
+    long[ DEVELOPER ]
+        DurationByDeveloperMap;
+    SEGMENT[]
+        SegmentArray;
+    SEGMENT[ string ]
+        SegmentByNameMap;
+    PHASE[]
+        PhaseArray;
+    PHASE[ string ]
+        PhaseByNameMap;
+    TASK
+        Task;
+
+    // -- CONSTRUCTORS
+
+    this(
+        string name
+        )
+    {
+        Name = name;
+        Duration = 0;
+        DurationByDeveloperMap = null;
+        PhaseArray = [];
+        PhaseByNameMap = null;
+        Task = null;
+    }
+
+    // -- OPERATIONS
+
+    PHASE GetPhase(
+        string phase_name
+        )
+    {
+        PHASE
+            phase;
+
+        if ( phase_name in PhaseByNameMap )
+        {
+            return PhaseByNameMap[ phase_name ];
+        }
+        else
+        {
+            phase = new PHASE( phase_name );
+
+            PhaseArray ~= phase;
+            PhaseByNameMap[ phase_name ] = phase;
+
+            return phase;
+        }
+    }
+}
+
+// ~~
+
 class DEVELOPER
 {
     // -- ATTRIBUTES
@@ -49,24 +252,23 @@ class DEVELOPER
         string name
         )
     {
-        this.Name = name;
-        this.Duration = 0;
-        this.DurationByProjectMap = null;
+        Name = name;
+        Duration = 0;
+        DurationByProjectMap = null;
     }
 }
 
 // ~~
 
-class PROJECT
+class PHASE
 {
     // -- ATTRIBUTES
 
     string
         Name;
     long
+        Number,
         Duration;
-    long[ DEVELOPER ]
-        DurationByDeveloperMap;
     TASK[]
         TaskArray;
 
@@ -76,77 +278,35 @@ class PROJECT
         string name
         )
     {
-        this.Name = name;
-        this.Duration = 0;
-        this.DurationByDeveloperMap = null;
+        Name = name;
+        Number = name.to!long();
+        Duration = 0;
     }
 }
 
 // ~~
 
-class TASK
+class SPRINT
 {
     // -- ATTRIBUTES
 
-    PROJECT
-        Project;
-    string
-        ModuleName,
-        GroupName;
-    DEVELOPER
-        Developer;
-    Date
-        Date_;
     string
         Name;
     long
+        Number,
         Duration;
-    string
-        State;
     TASK[]
-        SubtaskArray;
+        TaskArray;
 
     // -- CONSTRUCTORS
 
     this(
-        DEVELOPER developer,
-        PROJECT project,
-        string module_name,
-        string group_name,
-        string name,
-        Date date,
-        long duration
+        string name
         )
     {
-        this.Developer = developer;
-        this.Project = project;
-        this.ModuleName = module_name;
-        this.GroupName = group_name;
-        this.Name = name;
-        this.Date_ = date;
-        this.Duration = duration;
-    }
-
-    // -- INQUIRIES
-
-    void Dump(
-        )
-    {
-        writeln(
-            Project.Name,
-            ", ",
-            ModuleName,
-            ", ",
-            GroupName,
-            ", ",
-            Developer.Name,
-            ", ",
-            GetDateText( Date_ ),
-            ", ",
-            Name,
-            ", ",
-            Duration
-            );
+        Name = name;
+        Number = name.to!long();
+        Duration = 0;
     }
 }
 
@@ -238,7 +398,7 @@ class TRACKING
     TASK AddTask(
         string developer_name,
         string project_name,
-        string module_name,
+        string segment_name,
         string group_name,
         string task_name,
         Date task_date,
@@ -254,7 +414,7 @@ class TRACKING
 
         developer = GetDeveloper( developer_name );
         project = GetProject( project_name );
-        task = new TASK( developer, project, module_name, group_name, task_name, task_date, task_duration );
+        task = new TASK( developer, project, segment_name, group_name, task_name, task_date, task_duration );
 
         TaskArray ~= task;
 
@@ -284,7 +444,7 @@ class TRACKING
         string
             developer_name,
             group_name,
-            module_name,
+            segment_name,
             line,
             project_name,
             task_name,
@@ -347,7 +507,7 @@ class TRACKING
                     {
                         if ( line.startsWith( '-' ) )
                         {
-                            module_name = "";
+                            segment_name = "";
                             group_name = "";
                         }
 
@@ -359,7 +519,7 @@ class TRACKING
                         if ( line.startsWith( '-' )
                              && line.endsWith( ':' ) )
                         {
-                            module_name = line[ 1 .. $ - 1 ].strip();
+                            segment_name = line[ 1 .. $ - 1 ].strip();
                         }
                         else if ( line.startsWith( "  -" )
                                   && line.endsWith( ':' ) )
@@ -415,7 +575,7 @@ class TRACKING
                                         {
                                             task_date = GetIncrementedDate( monday_date, weekday_index );
 
-                                            AddTask( developer_name, project_name, module_name, group_name, task_name, task_date, task_duration );
+                                            AddTask( developer_name, project_name, segment_name, group_name, task_name, task_date, task_duration );
                                         }
                                     }
                                 }
@@ -472,7 +632,7 @@ class TRACKING
                 {
                     ReadFile( input_file_path );
                 }
-                else if ( input_file_label != "planning" )
+                else if ( input_file_label != "backlog" )
                 {
                     Abort( "Invalid file name : " ~ input_file_path );
                 }
@@ -526,9 +686,9 @@ class TRACKING
                 {
                     return a.Project.Name < b.Project.Name;
                 }
-                else if ( a.ModuleName != b.ModuleName )
+                else if ( a.SegmentName != b.SegmentName )
                 {
-                    return a.ModuleName < b.ModuleName;
+                    return a.SegmentName < b.SegmentName;
                 }
                 else
                 {
@@ -625,7 +785,7 @@ class TRACKING
 
     // ~~
 
-    string GetDurationText(
+    string GetTripleDurationText(
         long duration
         )
     {
@@ -639,7 +799,7 @@ class TRACKING
 
     // ~~
 
-    void WriteProjectFile(
+    void WriteProjectTrackingFile(
         string output_file_path
         )
     {
@@ -653,7 +813,7 @@ class TRACKING
             line_array
                 ~= project.Name
                    ~ '\t'
-                   ~ GetDurationText( project.Duration );
+                   ~ GetTripleDurationText( project.Duration );
         }
 
         output_file_path.WriteText( line_array.join( '\n' ) );
@@ -661,7 +821,7 @@ class TRACKING
 
     // ~~
 
-    void WriteProjectDeveloperFile(
+    void WriteProjectDeveloperTrackingFile(
         string output_file_path
         )
     {
@@ -681,7 +841,7 @@ class TRACKING
                            ~ '\t'
                            ~ developer.Name
                            ~ '\t'
-                           ~ GetDurationText( project.DurationByDeveloperMap[ developer ] );
+                           ~ GetTripleDurationText( project.DurationByDeveloperMap[ developer ] );
                 }
             }
         }
@@ -691,7 +851,7 @@ class TRACKING
 
     // ~~
 
-    void WriteDeveloperFile(
+    void WriteDeveloperTrackingFile(
         string output_file_path
         )
     {
@@ -705,7 +865,7 @@ class TRACKING
             line_array
                 ~= developer.Name
                    ~ '\t'
-                   ~ GetDurationText( developer.Duration );
+                   ~ GetTripleDurationText( developer.Duration );
         }
 
         output_file_path.WriteText( line_array.join( '\n' ) );
@@ -713,7 +873,7 @@ class TRACKING
 
     // ~~
 
-    void WriteDeveloperProjectFile(
+    void WriteDeveloperProjectTrackingFile(
         string output_file_path
         )
     {
@@ -733,7 +893,7 @@ class TRACKING
                            ~ '\t'
                            ~ project.Name
                            ~ '\t'
-                           ~ GetDurationText( developer.DurationByProjectMap[ project ] );
+                           ~ GetTripleDurationText( developer.DurationByProjectMap[ project ] );
                 }
             }
         }
@@ -743,16 +903,14 @@ class TRACKING
 
     // ~~
 
-    void WriteTaskFile(
+    void WriteTaskTrackingFile(
         string output_file_path
         )
     {
         string[]
             line_array;
 
-        line_array ~= "Date\tWeekday\tDeveloper\tProject\tModule\tTask\tMinutes\tHours\tDays";
-
-        SortTasks();
+        line_array ~= "Date\tWeekday\tDeveloper\tProject\tSegment\tGroup\tTask\tMinutes\tHours\tDays";
 
         foreach ( task; TaskArray )
         {
@@ -765,11 +923,13 @@ class TRACKING
                    ~ '\t'
                    ~ task.Project.Name
                    ~ '\t'
-                   ~ task.ModuleName
+                   ~ task.SegmentName
+                   ~ '\t'
+                   ~ task.GroupName
                    ~ '\t'
                    ~ task.Name
                    ~ '\t'
-                   ~ GetDurationText( task.Duration );
+                   ~ GetTripleDurationText( task.Duration );
         }
 
         output_file_path.WriteText( line_array.join( '\n' ) );
@@ -780,11 +940,11 @@ class TRACKING
     void WriteFiles(
         )
     {
-        WriteDeveloperFile( OutputFolderPath ~ "developer.tsv" );
-        WriteDeveloperProjectFile( OutputFolderPath ~ "developer_project.tsv" );
-        WriteProjectFile( OutputFolderPath ~ "project.tsv" );
-        WriteProjectDeveloperFile( OutputFolderPath ~ "project_developer.tsv" );
-        WriteTaskFile( OutputFolderPath ~ "task.tsv" );
+        WriteDeveloperTrackingFile( OutputFolderPath ~ "developer_tracking.tsv" );
+        WriteDeveloperProjectTrackingFile( OutputFolderPath ~ "developer_project_tracking.tsv" );
+        WriteProjectTrackingFile( OutputFolderPath ~ "project_tracking.tsv" );
+        WriteProjectDeveloperTrackingFile( OutputFolderPath ~ "project_developer_tracking.tsv" );
+        WriteTaskTrackingFile( OutputFolderPath ~ "task_tracking.tsv" );
     }
 }
 
@@ -802,12 +962,10 @@ class PLANNING
         ProjectArray;
     PROJECT[ string ]
         ProjectByNameMap;
-    TASK[]
-        TaskArray;
-    TASK[][ Date ]
-        TaskArrayByDateMap;
-    long
-        Duration;
+    SPRINT[]
+        SprintArray;
+    SPRINT[ string ]
+        SprintByNameMap;
 
     // -- CONSTRUCTORS
 
@@ -818,53 +976,32 @@ class PLANNING
         DeveloperByNameMap = null;
         ProjectArray = [];
         ProjectByNameMap = null;
-        TaskArray = [];
-        TaskArrayByDateMap = null;
-        Duration = 0;
+        SprintArray = [];
+        SprintByNameMap = null;
     }
 
     // -- OPERATIONS
 
-    bool HasDeveloper(
-        string developer_name
-        )
-    {
-        return ( developer_name in DeveloperByNameMap ) !is null;
-    }
-
-    // ~~
-
-    DEVELOPER AddDeveloper(
+    DEVELOPER GetDeveloper(
         string developer_name
         )
     {
         DEVELOPER
             developer;
 
-        developer = new DEVELOPER( developer_name );
+        if ( developer_name in DeveloperByNameMap )
+        {
+            return DeveloperByNameMap[ developer_name ];
+        }
+        else
+        {
+            developer = new DEVELOPER( developer_name );
 
-        DeveloperArray ~= developer;
-        DeveloperByNameMap[ developer_name ] = developer;
+            DeveloperArray ~= developer;
+            DeveloperByNameMap[ developer_name ] = developer;
 
-        return developer;
-    }
-
-    // ~~
-
-    DEVELOPER GetDeveloper(
-        string developer_name
-        )
-    {
-        return DeveloperByNameMap[ developer_name ];
-    }
-
-    // ~~
-
-    bool HasProject(
-        string project_name
-        )
-    {
-        return ( project_name in ProjectByNameMap ) !is null;
+            return developer;
+        }
     }
 
     // ~~
@@ -873,59 +1010,46 @@ class PLANNING
         string project_name
         )
     {
-        return ProjectByNameMap[ project_name ];
-    }
-
-    // ~~
-
-    PROJECT AddProject(
-        string project_name
-        )
-    {
         PROJECT
             project;
 
-        project = new PROJECT( project_name );
-
-        ProjectArray ~= project;
-        ProjectByNameMap[ project_name ] = project;
-
-        return project;
-    }
-
-    // ~~
-
-    TASK AddTask(
-        string developer_name,
-        string project_name,
-        string module_name,
-        string group_name,
-        string task_name,
-        Date task_date,
-        long task_duration
-        )
-    {
-        DEVELOPER
-            developer;
-        PROJECT
-            project;
-        TASK
-            task;
-
-        developer = GetDeveloper( developer_name );
-        project = GetProject( project_name );
-        task = new TASK( developer, project, module_name, group_name, task_name, task_date, task_duration );
-
-        TaskArray ~= task;
-
-        if ( task_date !in TaskArrayByDateMap )
+        if ( project_name in ProjectByNameMap )
         {
-            TaskArrayByDateMap[ task_date ] = [];
+            return ProjectByNameMap[ project_name ];
         }
+        else
+        {
+            project = new PROJECT( project_name );
 
-        TaskArrayByDateMap[ task_date ] ~= task;
+            ProjectArray ~= project;
+            ProjectByNameMap[ project_name ] = project;
 
-        return task;
+            return project;
+        }
+    }
+
+    // ~~
+
+    SPRINT GetSprint(
+        string sprint_name
+        )
+    {
+        SPRINT
+            sprint;
+
+        if ( sprint_name in SprintByNameMap )
+        {
+            return SprintByNameMap[ sprint_name ];
+        }
+        else
+        {
+            sprint = new SPRINT( sprint_name );
+
+            SprintArray ~= sprint;
+            SprintByNameMap[ sprint_name ] = sprint;
+
+            return sprint;
+        }
     }
 
     // ~~
@@ -934,33 +1058,33 @@ class PLANNING
         string input_file_path
         )
     {
-        bool
-            it_is_this_week;
+        char
+            first_character;
         long
             line_index,
             parenthesis_character_index,
-            task_duration,
-            weekday_index;
+            task_index;
         string
-            developer_name,
-            group_name,
-            module_name,
+            completion_text,
+            duration_text,
             line,
+            phase_name,
             project_name,
+            sprint_name,
             task_name,
-            trimmed_line,
-            week_date_text,
-            weekday_name;
+            task_text,
+            trimmed_line;
         string[]
             line_array,
-            part_array,
-            task_time_array;
-        Date
-            monday_date,
-            task_date;
+            part_array;
+        PROJECT
+            project;
+        TASK
+            task;
+        TASK[]
+            task_array;
 
         line_array = input_file_path.ReadText().replace( "\r", "" ).replace( "\t", "    " ).split( '\n' );
-        it_is_this_week = false;
 
         for ( line_index = 0;
               line_index < line_array.length;
@@ -971,36 +1095,189 @@ class PLANNING
 
             if ( trimmed_line != "" )
             {
-                if ( line.startsWith( '=' ) )
-                {
-                    developer_name = line[ 1 .. $ ].strip();
+                task = new TASK();
 
-                    if ( developer_name != ""
-                         && !HasDeveloper( developer_name ) )
-                    {
-                        AddDeveloper( developer_name );
-                    }
-                    else
-                    {
-                        Abort( "Duplicate developer name", line, line_index );
-                    }
-                }
-                else if ( trimmed_line.startsWith( '-' ) )
-                {
-                }
-                else
+                if ( !trimmed_line.startsWith( '-' ) )
                 {
                     project_name = trimmed_line;
 
-                    if ( project_name != ""
-                         && !HasProject( project_name ) )
+                    if ( project_name != "" )
                     {
-                        AddProject( project_name );
+                        project = GetProject( project_name );
+
+                        if ( project.Task is null )
+                        {
+                            project.Task = task;
+                        }
+                        else
+                        {
+                            task = project.Task;
+                        }
                     }
                     else
                     {
-                        Abort( "Duplicate project name", line, line_index );
+                        Abort( "Invalid project syntax", line, line_index );
                     }
+
+                    task.Indentation = -1;
+                    task_array = [ task ];
+                }
+                else
+                {
+                    if ( project !is null )
+                    {
+                        trimmed_line = trimmed_line[ 1 .. $ ].strip();
+
+                        task.Indentation = line.indexOf( '-' );
+
+                        for ( task_index = task_array.length - 1;
+                              task_index >= 0 && task_array[ task_index ].Indentation >= task.Indentation;
+                              --task_index )
+                        {
+                            task_array.length = task_index;
+                        }
+
+                        task_array[ $ - 1 ].SubtaskArray ~= task;
+                        task_array ~= task;
+                    }
+                    else
+                    {
+                        Abort( "Missing project", line, line_index );
+                    }
+                }
+
+                part_array = trimmed_line.split( ':' );
+
+                if ( part_array.length == 1 )
+                {
+                    task_text = part_array[ 0 ].strip();
+                }
+                else if ( part_array.length == 2 )
+                {
+                    task_text = part_array[ 0 ].strip();
+                    duration_text = part_array[ 1 ].strip();
+
+                    if ( duration_text != "" )
+                    {
+                        if ( IsDuration( duration_text ) )
+                        {
+                            task.HasDuration = true;
+                            task.Duration = GetDuration( duration_text );
+                        }
+                        else
+                        {
+                            Abort( "Invalid task duration", line, line_index );
+                        }
+                    }
+                }
+                else
+                {
+                    Abort( "Invalid task syntax", line, line_index );
+                }
+
+                if ( task_text.endsWith( ')' ) )
+                {
+                    parenthesis_character_index = task_text.indexOf( '(' );
+
+                    if ( parenthesis_character_index >= 0 )
+                    {
+                        task.Name = task_text[ 0 .. parenthesis_character_index ].strip();
+                        part_array = task_text[ parenthesis_character_index + 1 .. $ - 1 ].strip().split( ' ' );
+
+                        foreach ( part; part_array )
+                        {
+                            if ( part.startsWith( '#' ) )
+                            {
+                                phase_name = part[ 1 .. $ ];
+
+                                if ( IsPositiveInteger( phase_name ) )
+                                {
+                                    task.Phase = project.GetPhase( phase_name );
+                                }
+                                else
+                                {
+                                    Abort( "Invalid phase number", line, line_index );
+                                }
+                            }
+                            else if ( part.startsWith( '!' ) )
+                            {
+                                sprint_name = part[ 1 .. $ ];
+
+                                if ( IsPositiveInteger( sprint_name ) )
+                                {
+                                    task.Sprint = GetSprint( sprint_name );
+                                }
+                                else
+                                {
+                                    Abort( "Invalid sprint number", line, line_index );
+                                }
+                            }
+                            else if ( part.endsWith( '%' ) )
+                            {
+                                completion_text = part[ 0 .. $ - 1 ];
+
+                                if ( IsPositiveInteger( completion_text ) )
+                                {
+                                    task.HasCompletion = true;
+                                    task.Completion = completion_text.to!long();
+                                }
+                                else
+                                {
+                                    Abort( "Invalid sprint number", line, line_index );
+                                }
+                            }
+                            else
+                            {
+                                first_character = part[ 0 ];
+
+                                if ( first_character >= 'a'
+                                     && first_character <= 'z' )
+                                {
+                                    if ( task.Status == "" )
+                                    {
+                                        task.Status = part;
+                                    }
+                                    else
+                                    {
+                                        Abort( "Multiple states", line, line_index );
+                                    }
+                                }
+                                else
+                                {
+                                    if ( task.Developer is null )
+                                    {
+                                        task.Developer = GetDeveloper( part );
+                                    }
+                                    else
+                                    {
+                                        Abort( "Multiple developers", line, line_index );
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Abort( "Invalid task data", line, line_index );
+                    }
+                }
+                else
+                {
+                    task.Name = task_text;
+                }
+
+                task.Project = project;
+
+                if ( task_array.length > 2
+                     && task_array[ 1 ].Duration < 0 )
+                {
+                    task.SegmentName = task_array[ 1 ].Name;
+                }
+
+                if ( task_array.length > 3
+                     && task_array[ 2 ].Duration < 0 )
+                {
+                    task.GroupName = task_array[ 2 ].Name;
                 }
             }
         }
@@ -1029,7 +1306,7 @@ class PLANNING
         foreach ( input_file_path; input_file_path_array )
         {
             if ( input_file_path.startsWith( InputFolderPath )
-                 && input_file_path.GetFileLabel() == "planning.md" )
+                 && input_file_path.GetFileName() == "backlog.md" )
             {
                 ReadFile( input_file_path );
             }
@@ -1064,6 +1341,19 @@ class PLANNING
 
     // ~~
 
+    void SortSprints(
+        )
+    {
+        SprintArray.sort!(
+            ( a, b )
+            {
+                return a.Number < b.Number;
+            }
+            );
+    }
+
+    // ~~
+
     void ProcessTasks(
         )
     {
@@ -1071,9 +1361,203 @@ class PLANNING
 
     // ~~
 
+    string GetTripleDurationText(
+        long duration
+        )
+    {
+        return
+            ( duration * MinimumDurationFactor ).to!string()
+            ~ '\t'
+            ~ ( duration * MediumDurationFactor ).to!string()
+            ~ '\t'
+            ~ ( duration * MaximumDurationFactor ).to!string();
+    }
+
+    // ~~
+
+    void WriteDeveloperPlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Developer\tProject\tSegment\tGroup\tTask\tMinutes\tHours\tDays";
+
+        foreach ( developer; DeveloperArray )
+        {
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
+
+    // ~~
+
+    void WriteProjectPlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Phase\tSprint\tProject\tSegment\tGroup\tTask\tMinimum Days\tMedium Days\tMaximum Days\tDeveloper\tStatus";
+
+        foreach ( project; ProjectArray )
+        {
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
+
+    // ~~
+
+    void WritePhasePlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Project\tSegment\tGroup\tTask\tMinimum Days\tMedium Days\tMaximum Days";
+
+        foreach ( project; ProjectArray )
+        {
+            foreach ( phase; project.PhaseArray )
+            {
+            }
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
+
+    // ~~
+
+    void WriteSegmentPlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Project\tPhase\tSegment\tMinimum Days\tMedium Days\tMaximum Days";
+
+        foreach ( project; ProjectArray )
+        {
+            foreach ( segment; project.SegmentArray )
+            {
+            }
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
+
+    // ~~
+
+    void WriteGroupPlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Project\tPhase\tSegment\tGroup\tMinimum Days\tMedium Days\tMaximum Days";
+
+        foreach ( project; ProjectArray )
+        {
+            foreach ( segment; project.SegmentArray )
+            {
+                foreach ( group; segment.GroupArray )
+                {
+                }
+            }
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
+
+    // ~~
+
+    void WriteSprintPlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Sprint\tMinutes\tHours\tDays";
+
+        foreach ( sprint; SprintArray )
+        {
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
+
+    // ~~
+
+    void WriteTaskPlanningFile(
+        ref string[] line_array,
+        TASK task
+        )
+    {
+        line_array
+            ~= ( ( task.Phase !is null ) ? task.Phase.Name : "" )
+               ~ '\t'
+               ~ ( ( task.Sprint !is null ) ? task.Sprint.Name : "" )
+               ~ '\t'
+               ~ task.Project.Name
+               ~ '\t'
+               ~ ( ( task.Segment !is null ) ? task.Segment.Name : "" )
+               ~ '\t'
+               ~ ( ( task.Group !is null ) ? task.Group.Name : "" )
+               ~ '\t'
+               ~ task.Name
+               ~ '\t'
+               ~ ( task.HasDuration ? GetTripleDurationText( task.Duration ) : "\t\t" )
+               ~ '\t'
+               ~ ( ( task.Developer !is null ) ? task.Developer.Name : "" )
+               ~ '\t'
+               ~ ( task.HasCompletion ? task.Completion.to!string() ~ '%' : "" )
+               ~ '\t'
+               ~ task.Status;
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            WriteTaskPlanningFile( line_array, subtask );
+        }
+    }
+
+    // ~~
+
+    void WriteTaskPlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Phase\tSprint\tProject\tSegment\tGroup\tTask\tMinimum Days\tMedium Days\tMaximum Days\tDeveloper\tCompletion\tStatus";
+
+        foreach ( project; ProjectArray )
+        {
+            WriteTaskPlanningFile( line_array, project.Task );
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
+
+    // ~~
+
     void WriteFiles(
         )
     {
+        WriteDeveloperPlanningFile( OutputFolderPath ~ "developer_planning.tsv" );
+        WriteProjectPlanningFile( OutputFolderPath ~ "project_planning.tsv" );
+        WritePhasePlanningFile( OutputFolderPath ~ "phase_planning.tsv" );
+        WriteSegmentPlanningFile( OutputFolderPath ~ "segment_planning.tsv" );
+        WriteGroupPlanningFile( OutputFolderPath ~ "group_planning.tsv" );
+        WriteSprintPlanningFile( OutputFolderPath ~ "sprint_planning.tsv" );
+        WriteTaskPlanningFile( OutputFolderPath ~ "task_planning.tsv" );
     }
 }
 
@@ -1082,7 +1566,8 @@ class PLANNING
 string[]
     WeekdayNameArray = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
 Regex!char
-    RealRegularExpression = regex( r"^\d+\.?\d*$" ),
+    PositiveIntegerRegularExpression = regex( r"^\d+$" ),
+    PositiveRealRegularExpression = regex( r"^\d+\.?\d*$" ),
     MinuteDurationRegularExpression = regex( r"^\d+m$" ),
     HourDurationRegularExpression = regex( r"^\d+h$" ),
     HourMinuteDurationRegularExpression = regex( r"^\d+h\d+$" ),
@@ -1150,11 +1635,20 @@ void Abort(
 
 // ~~
 
-bool IsReal(
+bool IsPositiveInteger(
     string text
     )
 {
-    return !text.matchFirst( RealRegularExpression ).empty;
+    return !text.matchFirst( PositiveIntegerRegularExpression ).empty;
+}
+
+// ~~
+
+bool IsPositiveReal(
+    string text
+    )
+{
+    return !text.matchFirst( PositiveRealRegularExpression ).empty;
 }
 
 // ~~
@@ -1506,9 +2000,9 @@ void main(
 
     if ( argument_array.length == 6
          && IsDuration( argument_array[ 0 ] )
-         && IsReal( argument_array[ 1 ] )
-         && IsReal( argument_array[ 2 ] )
-         && IsReal( argument_array[ 3 ] )
+         && IsPositiveReal( argument_array[ 1 ] )
+         && IsPositiveReal( argument_array[ 2 ] )
+         && IsPositiveReal( argument_array[ 3 ] )
          && IsFolderPath( argument_array[ 4 ] )
          && IsFolderPath( argument_array[ 5 ] ) )
     {
@@ -1531,6 +2025,7 @@ void main(
         planning.ReadFiles();
         planning.SortDevelopers();
         planning.SortProjects();
+        planning.SortSprints();
         planning.ProcessTasks();
         planning.WriteFiles();
     }
