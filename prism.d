@@ -36,21 +36,22 @@ class TASK
 {
     // -- ATTRIBUTES
 
+    DEVELOPER
+        Developer;
     PROJECT
         Project;
     string
-        SegmentName,
-        GroupName;
+        SegmentName;
     SEGMENT
         Segment;
+    string
+        GroupName;
     GROUP
         Group;
     PHASE
         Phase;
     SPRINT
         Sprint;
-    DEVELOPER
-        Developer;
     Date
         Date_;
     string
@@ -68,7 +69,8 @@ class TASK
     TASK[]
         SubtaskArray;
     long
-        Indentation;
+        Indentation,
+        Level;
 
     // -- CONSTRUCTORS
 
@@ -159,6 +161,8 @@ class SEGMENT
         Task;
     GROUP[]
         GroupArray;
+    GROUP[ string ]
+        GroupByNameMap;
 
     // -- CONSTRUCTORS
 
@@ -168,6 +172,33 @@ class SEGMENT
     {
         Name = name;
         Duration = 0;
+        Task = null;
+        GroupArray = [];
+        GroupByNameMap = null;
+    }
+
+    // -- OPERATIONS
+
+    GROUP GetGroup(
+        string group_name
+        )
+    {
+        GROUP
+            group;
+
+        if ( group_name in GroupByNameMap )
+        {
+            return GroupByNameMap[ group_name ];
+        }
+        else
+        {
+            group = new GROUP( group_name );
+
+            GroupArray ~= group;
+            GroupByNameMap[ group_name ] = group;
+
+            return group;
+        }
     }
 }
 
@@ -183,6 +214,8 @@ class PROJECT
         Duration;
     long[ DEVELOPER ]
         DurationByDeveloperMap;
+    TASK
+        Task;
     SEGMENT[]
         SegmentArray;
     SEGMENT[ string ]
@@ -191,8 +224,6 @@ class PROJECT
         PhaseArray;
     PHASE[ string ]
         PhaseByNameMap;
-    TASK
-        Task;
 
     // -- CONSTRUCTORS
 
@@ -203,12 +234,38 @@ class PROJECT
         Name = name;
         Duration = 0;
         DurationByDeveloperMap = null;
+        Task = null;
+        SegmentArray = [];
+        SegmentByNameMap = null;
         PhaseArray = [];
         PhaseByNameMap = null;
-        Task = null;
     }
 
     // -- OPERATIONS
+
+    SEGMENT GetSegment(
+        string segment_name
+        )
+    {
+        SEGMENT
+            segment;
+
+        if ( segment_name in SegmentByNameMap )
+        {
+            return SegmentByNameMap[ segment_name ];
+        }
+        else
+        {
+            segment = new SEGMENT( segment_name );
+
+            SegmentArray ~= segment;
+            SegmentByNameMap[ segment_name ] = segment;
+
+            return segment;
+        }
+    }
+
+    // ~~
 
     PHASE GetPhase(
         string phase_name
@@ -435,7 +492,7 @@ class TRACKING
         )
     {
         bool
-            it_is_this_week;
+            it_is_this_sprint;
         long
             line_index,
             parenthesis_character_index,
@@ -464,7 +521,7 @@ class TRACKING
         monday_date = GetMondayDate( week_date_text[ 0 .. 10 ] );
 
         line_array = input_file_path.ReadText().replace( "\r", "" ).replace( "\t", "    " ).split( '\n' );
-        it_is_this_week = false;
+        it_is_this_sprint = false;
 
         for ( line_index = 0;
               line_index < line_array.length;
@@ -484,26 +541,26 @@ class TRACKING
                         Abort( "Missing developer name", line, line_index );
                     }
 
-                    it_is_this_week = false;
+                    it_is_this_sprint = false;
                 }
                 else if ( line.startsWith( "#" ) )
                 {
-                    if ( line == "# This week" )
+                    if ( line.startsWith( "# This" ) )
                     {
-                        it_is_this_week = true;
+                        it_is_this_sprint = true;
                     }
-                    else if ( line == "# Next week" )
+                    else if ( line.startsWith( "# Next" ) )
                     {
-                        it_is_this_week = false;
+                        it_is_this_sprint = false;
                     }
                     else
                     {
-                        Abort( "Invalid week syntax", line, line_index );
+                        Abort( "Invalid sprint syntax", line, line_index );
                     }
                 }
                 else if ( trimmed_line.startsWith( '-' ) )
                 {
-                    if ( it_is_this_week )
+                    if ( it_is_this_sprint )
                     {
                         if ( line.startsWith( '-' ) )
                         {
@@ -628,7 +685,7 @@ class TRACKING
             {
                 input_file_label = input_file_path.GetFileLabel();
 
-                if ( !input_file_label.matchFirst( WeeklySummaryFileLabelRegularExpression ).empty )
+                if ( !input_file_label.matchFirst( SprintReportFileLabelRegularExpression ).empty )
                 {
                     ReadFile( input_file_path );
                 }
@@ -1120,6 +1177,8 @@ class PLANNING
                     }
 
                     task.Indentation = -1;
+                    task.Level = 0;
+
                     task_array = [ task ];
                 }
                 else
@@ -1136,6 +1195,8 @@ class PLANNING
                         {
                             task_array.length = task_index;
                         }
+
+                        task.Level = task_array.length;
 
                         task_array[ $ - 1 ].SubtaskArray ~= task;
                         task_array ~= task;
@@ -1274,11 +1335,15 @@ class PLANNING
                     task.SegmentName = task_array[ 1 ].Name;
                 }
 
+                task.Segment = project.GetSegment( task.SegmentName );
+
                 if ( task_array.length > 3
                      && task_array[ 2 ].Duration < 0 )
                 {
                     task.GroupName = task_array[ 2 ].Name;
                 }
+
+                task.Group = task.Segment.GetGroup( task.GroupName );
             }
         }
     }
@@ -1355,8 +1420,36 @@ class PLANNING
     // ~~
 
     void ProcessTasks(
+        TASK task
         )
     {
+        foreach ( subtask; task.SubtaskArray )
+        {
+            ProcessTasks( subtask );
+
+            task.Duration += subtask.Duration;
+        }
+
+        if ( task.Phase !is null )
+        {
+            task.Phase.Duration += task.Duration;
+        }
+
+        if ( task.Sprint !is null )
+        {
+            task.Sprint.Duration += task.Duration;
+        }
+    }
+
+    // ~~
+
+    void ProcessTasks(
+        )
+    {
+        foreach ( project; ProjectArray )
+        {
+            ProcessTasks( project.Task );
+        }
     }
 
     // ~~
@@ -1366,11 +1459,11 @@ class PLANNING
         )
     {
         return
-            ( duration * MinimumDurationFactor ).to!string()
+            ( duration.to!double() * MinimumDurationFactor / DayDuration.to!double() ).to!string()
             ~ '\t'
-            ~ ( duration * MediumDurationFactor ).to!string()
+            ~ ( duration.to!double() * MediumDurationFactor / DayDuration.to!double() ).to!string()
             ~ '\t'
-            ~ ( duration * MaximumDurationFactor ).to!string();
+            ~ ( duration.to!double() * MaximumDurationFactor / DayDuration.to!double() ).to!string();
     }
 
     // ~~
@@ -1500,20 +1593,35 @@ class PLANNING
         TASK task
         )
     {
+        long
+            task_level;
+        string
+            task_name;
+
+        if ( task.Level == 0 )
+        {
+            task_name = task.Name;
+        }
+        else
+        {
+            for ( task_level = 0;
+                  task_level < task.Level;
+                  ++task_level )
+            {
+                task_name ~= "  ";
+            }
+
+            task_name ~= "- " ~ task.Name;
+        }
+
         line_array
             ~= ( ( task.Phase !is null ) ? task.Phase.Name : "" )
                ~ '\t'
                ~ ( ( task.Sprint !is null ) ? task.Sprint.Name : "" )
                ~ '\t'
-               ~ task.Project.Name
+               ~ task_name
                ~ '\t'
-               ~ ( ( task.Segment !is null ) ? task.Segment.Name : "" )
-               ~ '\t'
-               ~ ( ( task.Group !is null ) ? task.Group.Name : "" )
-               ~ '\t'
-               ~ task.Name
-               ~ '\t'
-               ~ ( task.HasDuration ? GetTripleDurationText( task.Duration ) : "\t\t" )
+               ~ GetTripleDurationText( task.Duration )
                ~ '\t'
                ~ ( ( task.Developer !is null ) ? task.Developer.Name : "" )
                ~ '\t'
@@ -1536,7 +1644,7 @@ class PLANNING
         string[]
             line_array;
 
-        line_array ~= "Phase\tSprint\tProject\tSegment\tGroup\tTask\tMinimum Days\tMedium Days\tMaximum Days\tDeveloper\tCompletion\tStatus";
+        line_array ~= "Phase\tSprint\tTask\tMinimum Days\tMedium Days\tMaximum Days\tDeveloper\tCompletion\tStatus";
 
         foreach ( project; ProjectArray )
         {
@@ -1564,7 +1672,23 @@ class PLANNING
 // -- CONSTANTS
 
 string[]
-    WeekdayNameArray = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
+    WeekdayNameArray =
+        [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Monday+",
+            "Tuesday+",
+            "Wednesday+",
+            "Thursday+",
+            "Friday+",
+            "Saturday+",
+            "Sunday+"
+        ];
 Regex!char
     PositiveIntegerRegularExpression = regex( r"^\d+$" ),
     PositiveRealRegularExpression = regex( r"^\d+\.?\d*$" ),
@@ -1573,7 +1697,7 @@ Regex!char
     HourMinuteDurationRegularExpression = regex( r"^\d+h\d+$" ),
     DayDurationRegularExpression = regex( r"^\d+\.?\d*d$" ),
     DateRegularExpression = regex( r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" ),
-    WeeklySummaryFileLabelRegularExpression = regex( r"^\d{4}_(0[1-9]|1[0-2])_(0[1-9]|[12]\d|3[01])$" );
+    SprintReportFileLabelRegularExpression = regex( r"^\d{4}_(0[1-9]|1[0-2])_(0[1-9]|[12]\d|3[01])$" );
 
 // -- VARIABLES
 
@@ -2033,6 +2157,8 @@ void main(
     {
         writeln( "Usage :" );
         writeln( "    prism {workday duration} {minimum duration factor} {medium duration factor} {maximum duration factor} INPUT_FOLDER/ OUTPUT_FOLDER/" );
+        writeln( "Example :" );
+        writeln( "    prism 8h 1 1.5 2 INPUT_FOLDER/ OUTPUT_FOLDER/" );
 
         PrintError( "Invalid arguments : " ~ argument_array.to!string() );
     }

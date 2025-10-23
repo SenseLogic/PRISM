@@ -4,7 +4,7 @@
 
 Agile project planner and tracker.
 
-# Sample project backlog
+# Backlog
 
 ```
 E-commerce Platform
@@ -69,12 +69,12 @@ Financial Analytics Dashboard
 - Add portfolio optimization (Mike #2) : 16h
 ```
 
-# Weekly summary
+# Sprint report
 
 ```
 === John ===
 
-# This week
+# This
 
 E-commerce Platform
 - Implemented user authentication API (Monday, Tuesday)
@@ -89,7 +89,7 @@ Inventory Management System
   - Designed admin dashboard layout (Wednesday 50m)
   - Added product search functionality (Thursday, Friday)
 
-# Next week
+# Next
 
 E-commerce Platform
 - Implement shopping cart functionality
@@ -101,7 +101,7 @@ Inventory Management System
 
 === Mike ===
 
-# This week
+# This
 
 Mobile Banking App
 - Implemented biometric login (Monday, Tuesday)
@@ -111,7 +111,7 @@ Financial Analytics Dashboard
 - Created expense categorization (Wednesday)
 - Implemented budget tracking features (Thursday, Friday)
 
-# Next week
+# Next
 
 Mobile Banking App
 - Add money transfer functionality
@@ -135,18 +135,19 @@ dmd -m64 prism.d
 ## Command line
 
 ```
-prism <workday duration> <input folder path> <output folder path>
+prism {workday duration} {minimum duration factor} {medium duration factor} {maximum duration factor} INPUT_FOLDER/ OUTPUT_FOLDER/
 ```
 
 ### Example
 
 ```bash
-prism 8h INPUT_FOLDER/ OUTPUT_FOLDER/
+prism 8h 1 1.5 2 INPUT_FOLDER/ OUTPUT_FOLDER/
 ```
 
 ## Limitations
 
-- The backlog and weekly summaries are independent.
+- Sprints must last one or two weeks.
+- Backlogs and sprint reports are independent.
 
 ## Version
 
