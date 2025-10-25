@@ -4,7 +4,7 @@
 
 Agile project planner and tracker.
 
-# Backlog
+# Backlogs
 
 ```
 E-commerce Platform
@@ -69,57 +69,32 @@ Financial Analytics Dashboard
 - Add portfolio optimization (Mike #2) : 16h
 ```
 
-# Sprint report
+# Sprint reports
 
 ```
-=== John ===
+# Mike
 
-# This
+## 2025-08-18
 
-E-commerce Platform
-- Implemented user authentication API (Monday, Tuesday)
-- Set up payment gateway integration (Wednesday)
-
-Inventory Management System
-- Created product catalog API (Monday 1h30)
-- Backend :
-  - Built order processing service (Monday 2h, Tuesday)
-  - Implemented stock tracking endpoints (Wednesday)
-- Frontend :
-  - Designed admin dashboard layout (Wednesday 50m)
-  - Added product search functionality (Thursday, Friday)
-
-# Next
-
-E-commerce Platform
-- Implement shopping cart functionality
-- Add order history tracking
-
-Inventory Management System
-- Build real-time inventory updates
-- Create reporting dashboard
-
-=== Mike ===
-
-# This
+### Done
 
 Mobile Banking App
-- Implemented biometric login (Monday, Tuesday)
-- Built transaction history API (Wednesday)
+- Implement investment portfolio (Monday, Tuesday)
+- Add financial planning tools (Wednesday)
 
 Financial Analytics Dashboard
-- Created expense categorization (Wednesday)
-- Implemented budget tracking features (Thursday, Friday)
+- Create tax optimization (Wednesday)
+- Build retirement planning (Thursday, Friday)
 
-# Next
+### Next
 
 Mobile Banking App
-- Add money transfer functionality
-- Implement push notifications
+- Implement cryptocurrency trading
+- Add insurance products
 
 Financial Analytics Dashboard
-- Build spending trend analysis
-- Add investment tracking
+- Create estate planning
+- Build risk assessment
 ```
 
 ## Installation
@@ -146,8 +121,7 @@ prism 8h 1 1.5 2 INPUT_FOLDER/ OUTPUT_FOLDER/
 
 ## Limitations
 
-- Sprints must last one or two weeks.
-- Backlogs and sprint reports are independent.
+- Backlog and sprint tasks are independent.
 
 ## Version
 

@@ -492,6 +492,7 @@ class TRACKING
         )
     {
         bool
+            it_has_sprint_date,
             it_is_this_sprint;
         long
             line_index,
@@ -514,11 +515,10 @@ class TRACKING
             task_time_array;
         Date
             monday_date,
+            sprint_date,
             task_date;
 
         week_date_text = input_file_path.GetFileLabel().replace( '_', '-' );
-
-        monday_date = GetMondayDate( week_date_text[ 0 .. 10 ] );
 
         line_array = input_file_path.ReadText().replace( "\r", "" ).replace( "\t", "    " ).split( '\n' );
         it_is_this_sprint = false;
@@ -532,30 +532,37 @@ class TRACKING
 
             if ( trimmed_line != "" )
             {
-                if ( line.startsWith( '=' ) )
+                if ( line.startsWith( "#" ) )
                 {
-                    developer_name = line.replace( "=", "" ).strip();
+                    trimmed_line = trimmed_line.replace( "#", "" ).strip();
 
-                    if ( developer_name == "" )
-                    {
-                        Abort( "Missing developer name", line, line_index );
-                    }
-
-                    it_is_this_sprint = false;
-                }
-                else if ( line.startsWith( "#" ) )
-                {
-                    if ( line.startsWith( "# This" ) )
+                    if ( trimmed_line == "Done" )
                     {
                         it_is_this_sprint = true;
                     }
-                    else if ( line.startsWith( "# Next" ) )
-                    {
-                        it_is_this_sprint = false;
-                    }
                     else
                     {
-                        Abort( "Invalid sprint syntax", line, line_index );
+                        it_is_this_sprint = false;
+
+                        if ( trimmed_line != "Next" )
+                        {
+                            if ( IsDate( trimmed_line ) )
+                            {
+                                it_has_sprint_date = true;
+
+                                sprint_date = GetDate( trimmed_line );
+                                monday_date = GetMondayDate( sprint_date );
+                            }
+                            else if ( trimmed_line != "Next"
+                                      && trimmed_line != "" )
+                            {
+                                developer_name = trimmed_line;
+                            }
+                            else
+                            {
+                                Abort( "Invalid section", line, line_index );
+                            }
+                        }
                     }
                 }
                 else if ( trimmed_line.startsWith( '-' ) )
@@ -610,13 +617,16 @@ class TRACKING
                                         }
                                         else
                                         {
-
-                                            Abort( "Invalid task syntax : " ~ task_time, line, line_index );
+                                            Abort( "Invalid task : " ~ task_time, line, line_index );
                                         }
 
                                         weekday_index = GetWeekdayIndex( weekday_name );
 
-                                        if ( developer_name == "" )
+                                        if ( !it_has_sprint_date )
+                                        {
+                                            Abort( "Missing sprint date", line, line_index );
+                                        }
+                                        else if ( developer_name == "" )
                                         {
                                             Abort( "Missing developer name", line, line_index );
                                         }
@@ -638,12 +648,12 @@ class TRACKING
                                 }
                                 else
                                 {
-                                    Abort( "Invalid task syntax", line, line_index );
+                                    Abort( "Invalid task", line, line_index );
                                 }
                             }
                             else
                             {
-                                Abort( "Invalid task syntax", line, line_index );
+                                Abort( "Invalid task", line, line_index );
                             }
                         }
                     }
@@ -661,8 +671,6 @@ class TRACKING
     void ReadFiles(
         )
     {
-        string
-            input_file_label;
         string[]
             input_file_path_array;
 
@@ -681,18 +689,10 @@ class TRACKING
         foreach ( input_file_path; input_file_path_array )
         {
             if ( input_file_path.startsWith( InputFolderPath )
-                 && input_file_path.endsWith( ".md" ) )
+                 && input_file_path.endsWith( ".md" )
+                 && input_file_path.GetFileName() != "backlog.md" )
             {
-                input_file_label = input_file_path.GetFileLabel();
-
-                if ( !input_file_label.matchFirst( SprintReportFileLabelRegularExpression ).empty )
-                {
-                    ReadFile( input_file_path );
-                }
-                else if ( input_file_label != "backlog" )
-                {
-                    Abort( "Invalid file name : " ~ input_file_path );
-                }
+                ReadFile( input_file_path );
             }
         }
     }
@@ -1173,7 +1173,7 @@ class PLANNING
                     }
                     else
                     {
-                        Abort( "Invalid project syntax", line, line_index );
+                        Abort( "Invalid project", line, line_index );
                     }
 
                     task.Indentation = -1;
@@ -1233,7 +1233,7 @@ class PLANNING
                 }
                 else
                 {
-                    Abort( "Invalid task syntax", line, line_index );
+                    Abort( "Invalid task", line, line_index );
                 }
 
                 if ( task_text.endsWith( ')' ) )
@@ -1696,8 +1696,7 @@ Regex!char
     HourDurationRegularExpression = regex( r"^\d+h$" ),
     HourMinuteDurationRegularExpression = regex( r"^\d+h\d+$" ),
     DayDurationRegularExpression = regex( r"^\d+\.?\d*d$" ),
-    DateRegularExpression = regex( r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" ),
-    SprintReportFileLabelRegularExpression = regex( r"^\d{4}_(0[1-9]|1[0-2])_(0[1-9]|[12]\d|3[01])$" );
+    DateRegularExpression = regex( r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" );
 
 // -- VARIABLES
 
@@ -2098,14 +2097,9 @@ Date GetIncrementedDate(
 // ~~
 
 Date GetMondayDate(
-    string date_text
+    Date date
     )
 {
-    Date
-        date;
-
-    date = GetDate( date_text );
-
     return GetIncrementedDate( date, -GetWeekdayIndex( date ) );
 }
 
