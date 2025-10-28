@@ -1238,7 +1238,7 @@ class PLANNING
 
                 if ( task_text.endsWith( ')' ) )
                 {
-                    parenthesis_character_index = task_text.indexOf( '(' );
+                    parenthesis_character_index = task_text.lastIndexOf( '(' );
 
                     if ( parenthesis_character_index >= 0 )
                     {
@@ -1247,7 +1247,7 @@ class PLANNING
 
                         foreach ( part; part_array )
                         {
-                            if ( part.startsWith( '#' ) )
+                            if ( part.startsWith( '~' ) )
                             {
                                 phase_name = part[ 1 .. $ ];
 
@@ -1393,19 +1393,6 @@ class PLANNING
 
     // ~~
 
-    void SortProjects(
-        )
-    {
-        ProjectArray.sort!(
-            ( a, b )
-            {
-                return a.Name < b.Name;
-            }
-            );
-    }
-
-    // ~~
-
     void SortSprints(
         )
     {
@@ -1464,6 +1451,74 @@ class PLANNING
             ~ ( duration.to!double() * MediumDurationFactor / DayDuration.to!double() ).to!string()
             ~ '\t'
             ~ ( duration.to!double() * MaximumDurationFactor / DayDuration.to!double() ).to!string();
+    }
+
+    // ~~
+
+    void WriteTaskPlanningFile(
+        ref string[] line_array,
+        TASK task
+        )
+    {
+        long
+            task_level;
+        string
+            task_name;
+
+        if ( task.Level == 0 )
+        {
+            task_name = task.Name;
+        }
+        else
+        {
+            for ( task_level = 0;
+                  task_level < task.Level;
+                  ++task_level )
+            {
+                task_name ~= "  ";
+            }
+
+            task_name ~= "- " ~ task.Name;
+        }
+
+        line_array
+            ~= ( ( task.Phase !is null ) ? task.Phase.Name : "" )
+               ~ '\t'
+               ~ ( ( task.Sprint !is null ) ? task.Sprint.Name : "" )
+               ~ '\t'
+               ~ task_name
+               ~ '\t'
+               ~ GetTripleDurationText( task.Duration )
+               ~ '\t'
+               ~ ( ( task.Developer !is null ) ? task.Developer.Name : "" )
+               ~ '\t'
+               ~ ( task.HasCompletion ? task.Completion.to!string() ~ '%' : "" )
+               ~ '\t'
+               ~ task.Status;
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            WriteTaskPlanningFile( line_array, subtask );
+        }
+    }
+
+    // ~~
+
+    void WriteTaskPlanningFile(
+        string output_file_path
+        )
+    {
+        string[]
+            line_array;
+
+        line_array ~= "Phase\tSprint\tTask\tMinimum Days\tMedium Days\tMaximum Days\tDeveloper\tCompletion\tStatus";
+
+        foreach ( project; ProjectArray )
+        {
+            WriteTaskPlanningFile( line_array, project.Task );
+        }
+
+        output_file_path.WriteText( line_array.join( '\n' ) );
     }
 
     // ~~
@@ -1588,84 +1643,16 @@ class PLANNING
 
     // ~~
 
-    void WriteTaskPlanningFile(
-        ref string[] line_array,
-        TASK task
-        )
-    {
-        long
-            task_level;
-        string
-            task_name;
-
-        if ( task.Level == 0 )
-        {
-            task_name = task.Name;
-        }
-        else
-        {
-            for ( task_level = 0;
-                  task_level < task.Level;
-                  ++task_level )
-            {
-                task_name ~= "  ";
-            }
-
-            task_name ~= "- " ~ task.Name;
-        }
-
-        line_array
-            ~= ( ( task.Phase !is null ) ? task.Phase.Name : "" )
-               ~ '\t'
-               ~ ( ( task.Sprint !is null ) ? task.Sprint.Name : "" )
-               ~ '\t'
-               ~ task_name
-               ~ '\t'
-               ~ GetTripleDurationText( task.Duration )
-               ~ '\t'
-               ~ ( ( task.Developer !is null ) ? task.Developer.Name : "" )
-               ~ '\t'
-               ~ ( task.HasCompletion ? task.Completion.to!string() ~ '%' : "" )
-               ~ '\t'
-               ~ task.Status;
-
-        foreach ( subtask; task.SubtaskArray )
-        {
-            WriteTaskPlanningFile( line_array, subtask );
-        }
-    }
-
-    // ~~
-
-    void WriteTaskPlanningFile(
-        string output_file_path
-        )
-    {
-        string[]
-            line_array;
-
-        line_array ~= "Phase\tSprint\tTask\tMinimum Days\tMedium Days\tMaximum Days\tDeveloper\tCompletion\tStatus";
-
-        foreach ( project; ProjectArray )
-        {
-            WriteTaskPlanningFile( line_array, project.Task );
-        }
-
-        output_file_path.WriteText( line_array.join( '\n' ) );
-    }
-
-    // ~~
-
     void WriteFiles(
         )
     {
+        WriteTaskPlanningFile( OutputFolderPath ~ "task_planning.tsv" );
         WriteDeveloperPlanningFile( OutputFolderPath ~ "developer_planning.tsv" );
         WriteProjectPlanningFile( OutputFolderPath ~ "project_planning.tsv" );
         WritePhasePlanningFile( OutputFolderPath ~ "phase_planning.tsv" );
         WriteSegmentPlanningFile( OutputFolderPath ~ "segment_planning.tsv" );
         WriteGroupPlanningFile( OutputFolderPath ~ "group_planning.tsv" );
         WriteSprintPlanningFile( OutputFolderPath ~ "sprint_planning.tsv" );
-        WriteTaskPlanningFile( OutputFolderPath ~ "task_planning.tsv" );
     }
 }
 
@@ -1681,13 +1668,27 @@ string[]
             "Friday",
             "Saturday",
             "Sunday",
-            "Monday+",
-            "Tuesday+",
-            "Wednesday+",
-            "Thursday+",
-            "Friday+",
-            "Saturday+",
-            "Sunday+"
+            "Monday#2",
+            "Tuesday#2",
+            "Wednesday#2",
+            "Thursday#2",
+            "Friday#2",
+            "Saturday#2",
+            "Sunday#2",
+            "Monday#3",
+            "Tuesday#3",
+            "Wednesday#3",
+            "Thursday#3",
+            "Friday#3",
+            "Saturday#3",
+            "Sunday#3",
+            "Monday#4",
+            "Tuesday#4",
+            "Wednesday#4",
+            "Thursday#4",
+            "Friday#4",
+            "Saturday#4",
+            "Sunday#4"
         ];
 Regex!char
     PositiveIntegerRegularExpression = regex( r"^\d+$" ),
@@ -2142,7 +2143,6 @@ void main(
         planning = new PLANNING();
         planning.ReadFiles();
         planning.SortDevelopers();
-        planning.SortProjects();
         planning.SortSprints();
         planning.ProcessTasks();
         planning.WriteFiles();
