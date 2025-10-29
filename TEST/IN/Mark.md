@@ -9,7 +9,7 @@ Cloud Infrastructure
 - Implement CI/CD pipeline (Wednesday)
 
 DevOps Monitoring System
-- Configured application monitoring (Wednesday)
+- Configure application monitoring (Wednesday)
 - Set up log aggregation (Thursday, Friday)
 
 ### Next

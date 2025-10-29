@@ -5,7 +5,7 @@
 ### Done
 
 AI Chatbot Service
-- Trained NLP model for customer queries (Monday, Tuesday)
+- Train NLP model for customer queries (Monday, Tuesday)
 - Implement conversation flow engine (Wednesday)
 
 Machine Learning Pipeline

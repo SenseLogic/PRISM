@@ -14,7 +14,7 @@ Inventory Management System
   - Build order processing service (Monday 2h, Tuesday)
   - Implement stock tracking endpoints (Wednesday)
 - Frontend :
-  - Designed admin dashboard layout (Wednesday 50m)
+  - Design admin dashboard layout (Wednesday 50m)
   - Add product search functionality (Thursday, Friday)
 
 ### Next
