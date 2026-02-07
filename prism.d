@@ -873,7 +873,7 @@ class TRACKING
                    ~ GetTripleDurationText( project.Duration );
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -903,7 +903,7 @@ class TRACKING
             }
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -925,7 +925,7 @@ class TRACKING
                    ~ GetTripleDurationText( developer.Duration );
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -955,7 +955,7 @@ class TRACKING
             }
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -989,7 +989,7 @@ class TRACKING
                    ~ GetTripleDurationText( task.Duration );
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1518,7 +1518,7 @@ class PLANNING
             WriteTaskPlanningFile( line_array, project.Task );
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1536,7 +1536,7 @@ class PLANNING
         {
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1554,7 +1554,7 @@ class PLANNING
         {
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1575,7 +1575,7 @@ class PLANNING
             }
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1596,7 +1596,7 @@ class PLANNING
             }
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1620,7 +1620,7 @@ class PLANNING
             }
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1638,7 +1638,7 @@ class PLANNING
         {
         }
 
-        output_file_path.WriteText( line_array.join( '\n' ) );
+        output_file_path.WriteLineArray( line_array );
     }
 
     // ~~
@@ -1964,6 +1964,20 @@ string ReadText(
     }
 
     return file_text;
+}
+
+// ~~
+
+void WriteLineArray(
+    string output_file_path,
+    string[] line_array
+    )
+{
+    if ( line_array.length >= 2
+         || output_file_path.exists() )
+    {
+        output_file_path.WriteText( line_array.join( '\n' ) );
+    }
 }
 
 // ~~

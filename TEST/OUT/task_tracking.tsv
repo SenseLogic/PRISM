@@ -6,23 +6,23 @@ Date	Weekday	Developer	Project	Segment	Group	Task	Minutes	Hours	Days
 2025-07-27	Monday	Luke	Customer Support Portal			Create ticket management system	480	8	1
 2025-07-27	Monday	Mark	Cloud Infrastructure			Set up Kubernetes cluster	480	8	1
 2025-07-27	Monday	Mike	Mobile Banking App			Implement biometric login	480	8	1
-2025-07-27	Monday	Paul	AI Chatbot Service			Trained NLP model for customer queries	480	8	1
+2025-07-27	Monday	Paul	AI Chatbot Service			Train NLP model for customer queries	480	8	1
 2025-07-28	Tuesday	Jack	Data Analytics Dashboard			Create interactive charts library	480	8	1
 2025-07-28	Tuesday	John	E-commerce Platform			Implement user authentication API	240	4	0.5
 2025-07-28	Tuesday	John	Inventory Management System	Backend		Build order processing service	240	4	0.5
 2025-07-28	Tuesday	Luke	Customer Support Portal			Create ticket management system	480	8	1
 2025-07-28	Tuesday	Mark	Cloud Infrastructure			Set up Kubernetes cluster	480	8	1
 2025-07-28	Tuesday	Mike	Mobile Banking App			Implement biometric login	480	8	1
-2025-07-28	Tuesday	Paul	AI Chatbot Service			Trained NLP model for customer queries	480	8	1
+2025-07-28	Tuesday	Paul	AI Chatbot Service			Train NLP model for customer queries	480	8	1
 2025-07-29	Wednesday	Jack	Business Intelligence Platform			Build custom report builder	240	4	0.5
 2025-07-29	Wednesday	Jack	Data Analytics Dashboard			Implement data filtering system	240	4	0.5
 2025-07-29	Wednesday	John	E-commerce Platform			Set up payment gateway integration	215	3.58333	0.447917
 2025-07-29	Wednesday	John	Inventory Management System	Backend		Implement stock tracking endpoints	215	3.58333	0.447917
-2025-07-29	Wednesday	John	Inventory Management System	Frontend		Designed admin dashboard layout	50	0.833333	0.104167
+2025-07-29	Wednesday	John	Inventory Management System	Frontend		Design admin dashboard layout	50	0.833333	0.104167
 2025-07-29	Wednesday	Luke	Customer Support Portal			Implement live chat functionality	240	4	0.5
 2025-07-29	Wednesday	Luke	Knowledge Base Platform			Build article management system	240	4	0.5
 2025-07-29	Wednesday	Mark	Cloud Infrastructure			Implement CI/CD pipeline	240	4	0.5
-2025-07-29	Wednesday	Mark	DevOps Monitoring System			Configured application monitoring	240	4	0.5
+2025-07-29	Wednesday	Mark	DevOps Monitoring System			Configure application monitoring	240	4	0.5
 2025-07-29	Wednesday	Mike	Financial Analytics Dashboard			Create expense categorization	240	4	0.5
 2025-07-29	Wednesday	Mike	Mobile Banking App			Build transaction history API	240	4	0.5
 2025-07-29	Wednesday	Paul	AI Chatbot Service			Implement conversation flow engine	240	4	0.5

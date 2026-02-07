@@ -76,7 +76,7 @@ Financial Analytics Dashboard
 
 A backlog file contains project names (`E-commerce Platform`) followed by a hierarchical list of segments, groups, tasks and subtasks.
 
-Each tasks includes a duration in minutes (`40m`), hours (`1h`, `1h30`), or days (`0.5d`).
+Each task includes a duration in minutes (`40m`), hours (`1h`, `1h30`), or days (`0.5d`).
 
 Tasks can also include the following properties inside parentheses :
 - Developer name in PascalCase (`Mike`)
