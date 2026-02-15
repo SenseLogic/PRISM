@@ -496,7 +496,7 @@ class TRACKING
             it_is_this_sprint;
         long
             line_index,
-            parenthesis_character_index,
+            bracket_character_index,
             task_duration,
             weekday_index;
         string
@@ -590,14 +590,14 @@ class TRACKING
                         {
                             group_name = line[ 3 .. $ - 1 ].strip();
                         }
-                        else if ( line.endsWith( ')' ) )
+                        else if ( line.endsWith( ']' ) )
                         {
-                            parenthesis_character_index = trimmed_line.lastIndexOf( '(' );
+                            bracket_character_index = trimmed_line.lastIndexOf( '[' );
 
-                            if ( parenthesis_character_index >= 0 )
+                            if ( bracket_character_index >= 0 )
                             {
-                                task_name = trimmed_line[ 1 .. parenthesis_character_index ].strip();
-                                task_time_array = trimmed_line[ parenthesis_character_index + 1 .. $ - 1 ].split( ',' );
+                                task_name = trimmed_line[ 1 .. bracket_character_index ].strip();
+                                task_time_array = trimmed_line[ bracket_character_index + 1 .. $ - 1 ].split( ',' );
 
                                 if ( task_time_array.length > 0 )
                                 {
@@ -1119,7 +1119,7 @@ class PLANNING
             first_character;
         long
             line_index,
-            parenthesis_character_index,
+            bracket_character_index,
             task_index;
         string
             completion_text,
@@ -1236,14 +1236,14 @@ class PLANNING
                     Abort( "Invalid task", line, line_index );
                 }
 
-                if ( task_text.endsWith( ')' ) )
+                if ( task_text.endsWith( ']' ) )
                 {
-                    parenthesis_character_index = task_text.lastIndexOf( '(' );
+                    bracket_character_index = task_text.lastIndexOf( '[' );
 
-                    if ( parenthesis_character_index >= 0 )
+                    if ( bracket_character_index >= 0 )
                     {
-                        task.Name = task_text[ 0 .. parenthesis_character_index ].strip();
-                        part_array = task_text[ parenthesis_character_index + 1 .. $ - 1 ].strip().split( ' ' );
+                        task.Name = task_text[ 0 .. bracket_character_index ].strip();
+                        part_array = task_text[ bracket_character_index + 1 .. $ - 1 ].strip().split( ' ' );
 
                         foreach ( part; part_array )
                         {
@@ -1455,6 +1455,101 @@ class PLANNING
 
     // ~~
 
+    string GetTaskPlanningName(
+        TASK task
+        )
+    {
+        long
+            task_level;
+        string
+            task_name;
+
+        if ( task.Level == 0 )
+        {
+            task_name = task.Name;
+        }
+        else
+        {
+            task_name = "";
+
+            for ( task_level = 0;
+                  task_level < task.Level;
+                  ++task_level )
+            {
+                task_name ~= "  ";
+            }
+
+            task_name ~= "- " ~ task.Name;
+        }
+
+        return task_name;
+    }
+
+    // ~~
+
+    long GetSegmentPhaseDuration(
+        TASK task,
+        PHASE phase,
+        SEGMENT segment
+        )
+    {
+        long
+            duration;
+
+        if ( task is null )
+        {
+            return 0;
+        }
+
+        duration = 0;
+
+        if ( task.Phase is phase && task.Segment is segment )
+        {
+            duration = task.Duration;
+        }
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            duration += GetSegmentPhaseDuration( subtask, phase, segment );
+        }
+
+        return duration;
+    }
+
+    // ~~
+
+    long GetGroupPhaseDuration(
+        TASK task,
+        PHASE phase,
+        SEGMENT segment,
+        GROUP group
+        )
+    {
+        long
+            duration;
+
+        if ( task is null )
+        {
+            return 0;
+        }
+
+        duration = 0;
+
+        if ( task.Phase is phase && task.Segment is segment && task.Group is group )
+        {
+            duration = task.Duration;
+        }
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            duration += GetGroupPhaseDuration( subtask, phase, segment, group );
+        }
+
+        return duration;
+    }
+
+    // ~~
+
     void WriteTaskPlanningFile(
         ref string[] line_array,
         TASK task
@@ -1524,6 +1619,42 @@ class PLANNING
     // ~~
 
     void WriteDeveloperPlanningFile(
+        ref string[] line_array,
+        DEVELOPER developer,
+        PROJECT project,
+        TASK task
+        )
+    {
+        if ( task is null )
+        {
+            return;
+        }
+
+        if ( task.Developer is developer )
+        {
+            line_array
+                ~= developer.Name
+                   ~ '\t'
+                   ~ project.Name
+                   ~ '\t'
+                   ~ ( ( task.Segment !is null ) ? task.Segment.Name : "" )
+                   ~ '\t'
+                   ~ ( ( task.Group !is null ) ? task.Group.Name : "" )
+                   ~ '\t'
+                   ~ GetTaskPlanningName( task )
+                   ~ '\t'
+                   ~ GetTripleDurationText( task.Duration );
+        }
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            WriteDeveloperPlanningFile( line_array, developer, project, subtask );
+        }
+    }
+
+    // ~~
+
+    void WriteDeveloperPlanningFile(
         string output_file_path
         )
     {
@@ -1534,9 +1665,51 @@ class PLANNING
 
         foreach ( developer; DeveloperArray )
         {
+            foreach ( project; ProjectArray )
+            {
+                WriteDeveloperPlanningFile( line_array, developer, project, project.Task );
+            }
         }
 
         output_file_path.WriteLineArray( line_array );
+    }
+
+    // ~~
+
+    void WriteProjectPlanningFile(
+        ref string[] line_array,
+        PROJECT project,
+        TASK task
+        )
+    {
+        if ( task is null )
+        {
+            return;
+        }
+
+        line_array
+            ~= ( ( task.Phase !is null ) ? task.Phase.Name : "" )
+               ~ '\t'
+               ~ ( ( task.Sprint !is null ) ? task.Sprint.Name : "" )
+               ~ '\t'
+               ~ project.Name
+               ~ '\t'
+               ~ ( ( task.Segment !is null ) ? task.Segment.Name : "" )
+               ~ '\t'
+               ~ ( ( task.Group !is null ) ? task.Group.Name : "" )
+               ~ '\t'
+               ~ GetTaskPlanningName( task )
+               ~ '\t'
+               ~ GetTripleDurationText( task.Duration )
+               ~ '\t'
+               ~ ( ( task.Developer !is null ) ? task.Developer.Name : "" )
+               ~ '\t'
+               ~ task.Status;
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            WriteProjectPlanningFile( line_array, project, subtask );
+        }
     }
 
     // ~~
@@ -1552,9 +1725,44 @@ class PLANNING
 
         foreach ( project; ProjectArray )
         {
+            WriteProjectPlanningFile( line_array, project, project.Task );
         }
 
         output_file_path.WriteLineArray( line_array );
+    }
+
+    // ~~
+
+    void WritePhasePlanningFile(
+        ref string[] line_array,
+        PROJECT project,
+        PHASE phase,
+        TASK task
+        )
+    {
+        if ( task is null )
+        {
+            return;
+        }
+
+        if ( task.Phase is phase )
+        {
+            line_array
+                ~= project.Name
+                   ~ '\t'
+                   ~ ( ( task.Segment !is null ) ? task.Segment.Name : "" )
+                   ~ '\t'
+                   ~ ( ( task.Group !is null ) ? task.Group.Name : "" )
+                   ~ '\t'
+                   ~ GetTaskPlanningName( task )
+                   ~ '\t'
+                   ~ GetTripleDurationText( task.Duration );
+        }
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            WritePhasePlanningFile( line_array, project, phase, subtask );
+        }
     }
 
     // ~~
@@ -1572,6 +1780,7 @@ class PLANNING
         {
             foreach ( phase; project.PhaseArray )
             {
+                WritePhasePlanningFile( line_array, project, phase, project.Task );
             }
         }
 
@@ -1584,6 +1793,8 @@ class PLANNING
         string output_file_path
         )
     {
+        long
+            duration;
         string[]
             line_array;
 
@@ -1591,8 +1802,24 @@ class PLANNING
 
         foreach ( project; ProjectArray )
         {
-            foreach ( segment; project.SegmentArray )
+            foreach ( phase; project.PhaseArray )
             {
+                foreach ( segment; project.SegmentArray )
+                {
+                    duration = GetSegmentPhaseDuration( project.Task, phase, segment );
+
+                    if ( duration > 0 )
+                    {
+                        line_array
+                            ~= project.Name
+                               ~ '\t'
+                               ~ phase.Name
+                               ~ '\t'
+                               ~ segment.Name
+                               ~ '\t'
+                               ~ GetTripleDurationText( duration );
+                    }
+                }
             }
         }
 
@@ -1605,6 +1832,8 @@ class PLANNING
         string output_file_path
         )
     {
+        long
+            duration;
         string[]
             line_array;
 
@@ -1612,10 +1841,28 @@ class PLANNING
 
         foreach ( project; ProjectArray )
         {
-            foreach ( segment; project.SegmentArray )
+            foreach ( phase; project.PhaseArray )
             {
-                foreach ( group; segment.GroupArray )
+                foreach ( segment; project.SegmentArray )
                 {
+                    foreach ( group; segment.GroupArray )
+                    {
+                        duration = GetGroupPhaseDuration( project.Task, phase, segment, group );
+
+                        if ( duration > 0 )
+                        {
+                            line_array
+                                ~= project.Name
+                                   ~ '\t'
+                                   ~ phase.Name
+                                   ~ '\t'
+                                   ~ segment.Name
+                                   ~ '\t'
+                                   ~ group.Name
+                                   ~ '\t'
+                                   ~ GetTripleDurationText( duration );
+                        }
+                    }
                 }
             }
         }
@@ -1636,6 +1883,10 @@ class PLANNING
 
         foreach ( sprint; SprintArray )
         {
+            line_array
+                ~= sprint.Name
+                   ~ '\t'
+                   ~ GetTripleDurationText( sprint.Duration );
         }
 
         output_file_path.WriteLineArray( line_array );

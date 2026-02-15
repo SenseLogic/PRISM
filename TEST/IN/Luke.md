@@ -5,12 +5,12 @@
 ### Done
 
 Customer Support Portal
-- Create ticket management system (Monday, Tuesday)
-- Implement live chat functionality (Wednesday)
+- Create ticket management system [Monday, Tuesday]
+- Implement live chat functionality [Wednesday]
 
 Knowledge Base Platform
-- Build article management system (Wednesday)
-- Add search and categorization (Thursday, Friday)
+- Build article management system [Wednesday]
+- Add search and categorization [Thursday, Friday]
 
 ### Next
 
@@ -27,12 +27,12 @@ Knowledge Base Platform
 ### Done
 
 Customer Support Portal
-- Add customer satisfaction surveys (Monday, Tuesday)
-- Implement escalation workflows (Wednesday)
+- Add customer satisfaction surveys [Monday, Tuesday]
+- Implement escalation workflows [Wednesday]
 
 Knowledge Base Platform
-- Create content approval system (Wednesday)
-- Add analytics tracking (Thursday, Friday)
+- Create content approval system [Wednesday]
+- Add analytics tracking [Thursday, Friday]
 
 ### Next
 
@@ -49,12 +49,12 @@ Knowledge Base Platform
 ### Done
 
 Customer Support Portal
-- Implement AI-powered ticket routing (Monday, Tuesday)
-- Add video call integration (Wednesday)
+- Implement AI-powered ticket routing [Monday, Tuesday]
+- Add video call integration [Wednesday]
 
 Knowledge Base Platform
-- Create content recommendation engine (Wednesday)
-- Build multi-language support (Thursday, Friday)
+- Create content recommendation engine [Wednesday]
+- Build multi-language support [Thursday, Friday]
 
 ### Next
 
@@ -71,12 +71,12 @@ Knowledge Base Platform
 ### Done
 
 Customer Support Portal
-- Implement omnichannel support (Monday, Tuesday)
-- Add customer journey tracking (Wednesday)
+- Implement omnichannel support [Monday, Tuesday]
+- Add customer journey tracking [Wednesday]
 
 Knowledge Base Platform
-- Create content personalization (Wednesday)
-- Build community features (Thursday, Friday)
+- Create content personalization [Wednesday]
+- Build community features [Thursday, Friday]
 
 ### Next
 

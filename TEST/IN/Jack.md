@@ -5,12 +5,12 @@
 ### Done
 
 Data Analytics Dashboard
-- Create interactive charts library (Monday, Tuesday)
-- Implement data filtering system (Wednesday)
+- Create interactive charts library [Monday, Tuesday]
+- Implement data filtering system [Wednesday]
 
 Business Intelligence Platform
-- Build custom report builder (Wednesday)
-- Add data export functionality (Thursday, Friday)
+- Build custom report builder [Wednesday]
+- Add data export functionality [Thursday, Friday]
 
 ### Next
 
@@ -27,12 +27,12 @@ Business Intelligence Platform
 ### Done
 
 Data Analytics Dashboard
-- Implement real-time data streaming (Monday, Tuesday)
-- Add advanced visualization options (Wednesday)
+- Implement real-time data streaming [Monday, Tuesday]
+- Add advanced visualization options [Wednesday]
 
 Business Intelligence Platform
-- Create automated report scheduling (Wednesday)
-- Build data source connectors (Thursday, Friday)
+- Create automated report scheduling [Wednesday]
+- Build data source connectors [Thursday, Friday]
 
 ### Next
 
@@ -49,12 +49,12 @@ Business Intelligence Platform
 ### Done
 
 Data Analytics Dashboard
-- Implement predictive analytics (Monday, Tuesday)
-- Add custom dashboard builder (Wednesday)
+- Implement predictive analytics [Monday, Tuesday]
+- Add custom dashboard builder [Wednesday]
 
 Business Intelligence Platform
-- Create data governance framework (Wednesday)
-- Build API for external integrations (Thursday, Friday)
+- Create data governance framework [Wednesday]
+- Build API for external integrations [Thursday, Friday]
 
 ### Next
 
@@ -71,12 +71,12 @@ Business Intelligence Platform
 ### Done
 
 Data Analytics Dashboard
-- Implement machine learning insights (Monday, Tuesday)
-- Add collaborative features (Wednesday)
+- Implement machine learning insights [Monday, Tuesday]
+- Add collaborative features [Wednesday]
 
 Business Intelligence Platform
-- Create data lineage tracking (Wednesday)
-- Build compliance reporting (Thursday, Friday)
+- Create data lineage tracking [Wednesday]
+- Build compliance reporting [Thursday, Friday]
 
 ### Next
 

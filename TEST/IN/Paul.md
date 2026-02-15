@@ -5,12 +5,12 @@
 ### Done
 
 AI Chatbot Service
-- Train NLP model for customer queries (Monday, Tuesday)
-- Implement conversation flow engine (Wednesday)
+- Train NLP model for customer queries [Monday, Tuesday]
+- Implement conversation flow engine [Wednesday]
 
 Machine Learning Pipeline
-- Build data preprocessing service (Wednesday)
-- Create model training automation (Thursday, Friday)
+- Build data preprocessing service [Wednesday]
+- Create model training automation [Thursday, Friday]
 
 ### Next
 
@@ -27,12 +27,12 @@ Machine Learning Pipeline
 ### Done
 
 AI Chatbot Service
-- Add multi-language support (Monday, Tuesday)
-- Implement sentiment analysis (Wednesday)
+- Add multi-language support [Monday, Tuesday]
+- Implement sentiment analysis [Wednesday]
 
 Machine Learning Pipeline
-- Build model versioning system (Wednesday)
-- Add A/B testing framework (Thursday, Friday)
+- Build model versioning system [Wednesday]
+- Add A/B testing framework [Thursday, Friday]
 
 ### Next
 
@@ -49,12 +49,12 @@ Machine Learning Pipeline
 ### Done
 
 AI Chatbot Service
-- Implement voice recognition (Monday, Tuesday)
-- Add personality customization (Wednesday)
+- Implement voice recognition [Monday, Tuesday]
+- Add personality customization [Wednesday]
 
 Machine Learning Pipeline
-- Create model performance monitoring (Wednesday)
-- Build feature engineering automation (Thursday, Friday)
+- Create model performance monitoring [Wednesday]
+- Build feature engineering automation [Thursday, Friday]
 
 ### Next
 
@@ -71,12 +71,12 @@ Machine Learning Pipeline
 ### Done
 
 AI Chatbot Service
-- Implement emotion detection (Monday, Tuesday)
-- Add conversation memory (Wednesday)
+- Implement emotion detection [Monday, Tuesday]
+- Add conversation memory [Wednesday]
 
 Machine Learning Pipeline
-- Create automated model selection (Wednesday)
-- Build data drift detection (Thursday, Friday)
+- Create automated model selection [Wednesday]
+- Build data drift detection [Thursday, Friday]
 
 ### Next
 

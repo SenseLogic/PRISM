@@ -5,17 +5,17 @@
 ### Done
 
 E-commerce Platform
-- Implement user authentication API (Monday, Tuesday)
-- Set up payment gateway integration (Wednesday)
+- Implement user authentication API [Monday, Tuesday]
+- Set up payment gateway integration [Wednesday]
 
 Inventory Management System
-- Create product catalog API (Monday 1h30)
+- Create product catalog API [Monday 1h30]
 - Backend :
-  - Build order processing service (Monday 2h, Tuesday)
-  - Implement stock tracking endpoints (Wednesday)
+  - Build order processing service [Monday 2h, Tuesday]
+  - Implement stock tracking endpoints [Wednesday]
 - Frontend :
-  - Design admin dashboard layout (Wednesday 50m)
-  - Add product search functionality (Thursday, Friday)
+  - Design admin dashboard layout [Wednesday 50m]
+  - Add product search functionality [Thursday, Friday]
 
 ### Next
 
@@ -32,12 +32,12 @@ Inventory Management System
 ### Done
 
 E-commerce Platform
-- Implement shopping cart functionality (Monday, Tuesday)
-- Add order history tracking (Wednesday)
+- Implement shopping cart functionality [Monday, Tuesday]
+- Add order history tracking [Wednesday]
 
 Inventory Management System
-- Build real-time inventory updates (Wednesday)
-- Create reporting dashboard (Thursday, Friday)
+- Build real-time inventory updates [Wednesday]
+- Create reporting dashboard [Thursday, Friday]
 
 ### Next
 
@@ -54,12 +54,12 @@ Inventory Management System
 ### Done
 
 E-commerce Platform
-- Implement product recommendations (Monday, Tuesday)
-- Add customer review system (Wednesday)
+- Implement product recommendations [Monday, Tuesday]
+- Add customer review system [Wednesday]
 
 Inventory Management System
-- Build automated reorder system (Wednesday)
-- Create supplier management (Thursday, Friday)
+- Build automated reorder system [Wednesday]
+- Create supplier management [Thursday, Friday]
 
 ### Next
 
@@ -76,12 +76,12 @@ Inventory Management System
 ### Done
 
 E-commerce Platform
-- Implement loyalty program (Monday, Tuesday)
-- Add social commerce features (Wednesday)
+- Implement loyalty program [Monday, Tuesday]
+- Add social commerce features [Wednesday]
 
 Inventory Management System
-- Build demand forecasting (Wednesday)
-- Create quality control system (Thursday, Friday)
+- Build demand forecasting [Wednesday]
+- Create quality control system [Thursday, Friday]
 
 ### Next
 

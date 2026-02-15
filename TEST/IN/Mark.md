@@ -5,12 +5,12 @@
 ### Done
 
 Cloud Infrastructure
-- Set up Kubernetes cluster (Monday, Tuesday)
-- Implement CI/CD pipeline (Wednesday)
+- Set up Kubernetes cluster [Monday, Tuesday]
+- Implement CI/CD pipeline [Wednesday]
 
 DevOps Monitoring System
-- Configure application monitoring (Wednesday)
-- Set up log aggregation (Thursday, Friday)
+- Configure application monitoring [Wednesday]
+- Set up log aggregation [Thursday, Friday]
 
 ### Next
 
@@ -27,12 +27,12 @@ DevOps Monitoring System
 ### Done
 
 Cloud Infrastructure
-- Implement auto-scaling policies (Monday, Tuesday)
-- Add disaster recovery setup (Wednesday)
+- Implement auto-scaling policies [Monday, Tuesday]
+- Add disaster recovery setup [Wednesday]
 
 DevOps Monitoring System
-- Build alerting system (Wednesday)
-- Create performance dashboards (Thursday, Friday)
+- Build alerting system [Wednesday]
+- Create performance dashboards [Thursday, Friday]
 
 ### Next
 
@@ -49,12 +49,12 @@ DevOps Monitoring System
 ### Done
 
 Cloud Infrastructure
-- Implement multi-region deployment (Monday, Tuesday)
-- Add security compliance scanning (Wednesday)
+- Implement multi-region deployment [Monday, Tuesday]
+- Add security compliance scanning [Wednesday]
 
 DevOps Monitoring System
-- Build capacity planning tools (Wednesday)
-- Create incident response automation (Thursday, Friday)
+- Build capacity planning tools [Wednesday]
+- Create incident response automation [Thursday, Friday]
 
 ### Next
 
@@ -71,12 +71,12 @@ DevOps Monitoring System
 ### Done
 
 Cloud Infrastructure
-- Implement zero-downtime deployments (Monday, Tuesday)
-- Add cost optimization tools (Wednesday)
+- Implement zero-downtime deployments [Monday, Tuesday]
+- Add cost optimization tools [Wednesday]
 
 DevOps Monitoring System
-- Build chaos engineering platform (Wednesday)
-- Create security monitoring (Thursday, Friday)
+- Build chaos engineering platform [Wednesday]
+- Create security monitoring [Thursday, Friday]
 
 ### Next
 

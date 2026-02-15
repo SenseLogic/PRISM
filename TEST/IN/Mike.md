@@ -5,12 +5,12 @@
 ### Done
 
 Mobile Banking App
-- Implement biometric login (Monday, Tuesday)
-- Build transaction history API (Wednesday)
+- Implement biometric login [Monday, Tuesday]
+- Build transaction history API [Wednesday]
 
 Financial Analytics Dashboard
-- Create expense categorization (Wednesday)
-- Implement budget tracking features (Thursday, Friday)
+- Create expense categorization [Wednesday]
+- Implement budget tracking features [Thursday, Friday]
 
 ### Next
 
@@ -27,12 +27,12 @@ Financial Analytics Dashboard
 ### Done
 
 Mobile Banking App
-- Add money transfer functionality (Monday, Tuesday)
-- Implement push notifications (Wednesday)
+- Add money transfer functionality [Monday, Tuesday]
+- Implement push notifications [Wednesday]
 
 Financial Analytics Dashboard
-- Build spending trend analysis (Wednesday)
-- Add investment tracking (Thursday, Friday)
+- Build spending trend analysis [Wednesday]
+- Add investment tracking [Thursday, Friday]
 
 ### Next
 
@@ -49,12 +49,12 @@ Financial Analytics Dashboard
 ### Done
 
 Mobile Banking App
-- Implement bill payment system (Monday, Tuesday)
-- Add account aggregation (Wednesday)
+- Implement bill payment system [Monday, Tuesday]
+- Add account aggregation [Wednesday]
 
 Financial Analytics Dashboard
-- Create financial goal tracking (Wednesday)
-- Build credit score monitoring (Thursday, Friday)
+- Create financial goal tracking [Wednesday]
+- Build credit score monitoring [Thursday, Friday]
 
 ### Next
 
@@ -71,12 +71,12 @@ Financial Analytics Dashboard
 ### Done
 
 Mobile Banking App
-- Implement investment portfolio (Monday, Tuesday)
-- Add financial planning tools (Wednesday)
+- Implement investment portfolio [Monday, Tuesday]
+- Add financial planning tools [Wednesday]
 
 Financial Analytics Dashboard
-- Create tax optimization (Wednesday)
-- Build retirement planning (Thursday, Friday)
+- Create tax optimization [Wednesday]
+- Build retirement planning [Thursday, Friday]
 
 ### Next
 
