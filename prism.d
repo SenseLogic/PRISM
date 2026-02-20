@@ -121,6 +121,48 @@ class TASK
             Duration
             );
     }
+
+    // ~~
+
+    long GetLevelCount(
+        )
+    {
+        long
+            level_count,
+            subtask_level_count;
+
+        level_count = 1;
+
+        foreach ( subtask; SubtaskArray )
+        {
+            subtask_level_count = 1 + subtask.GetLevelCount();
+
+            if ( subtask_level_count > level_count )
+            {
+                level_count = subtask_level_count;
+            }
+        }
+
+        return level_count;
+    }
+
+    // ~~
+
+    long GetSubtaskCount(
+        )
+    {
+        long
+            subtask_count;
+
+        subtask_count = SubtaskArray.length;
+
+        foreach ( subtask; SubtaskArray )
+        {
+            subtask_count += subtask.GetSubtaskCount();
+        }
+
+        return subtask_count;
+    }
 }
 
 // ~~
@@ -1472,7 +1514,7 @@ class PLANNING
         {
             task_name = "";
 
-            for ( task_level = 0;
+            for ( task_level = 1;
                   task_level < task.Level;
                   ++task_level )
             {
@@ -1550,38 +1592,136 @@ class PLANNING
 
     // ~~
 
-    void WriteTaskPlanningFile(
+    void WriteTaskPlanningSheetFile(
         ref string[] line_array,
-        TASK task
+        TASK task,
+        long task_level_count
         )
     {
         long
             task_level;
         string
-            task_name;
+            line;
 
-        if ( task.Level == 0 )
+        line
+            = ( ( task.Phase !is null ) ? task.Phase.Name : "" )
+              ~ '\t'
+              ~ ( ( task.Sprint !is null ) ? task.Sprint.Name : "" )
+              ~ '\t'
+              ~ GetTaskPlanningName( task );
+
+        for ( task_level = 0;
+              task_level < task.Level;
+              ++task_level )
         {
-            task_name = task.Name;
+            line ~= "\t\t\t";
+        }
+
+        if ( task.SubtaskArray.length > 0 )
+        {
+            line
+                ~= "\t=SUM(@[+3,+1]:@[+3,+"
+                   ~ task.GetSubtaskCount().to!string()
+                   ~ "])";
         }
         else
         {
-            for ( task_level = 0;
-                  task_level < task.Level;
-                  ++task_level )
-            {
-                task_name ~= "  ";
-            }
-
-            task_name ~= "- " ~ task.Name;
+            line
+                ~= "\t"
+                   ~ ( task.Duration.to!double() * MinimumDurationFactor / DayDuration.to!double() ).to!string();
         }
 
+        line
+            ~= "\t=@[-1,]*"
+               ~ MediumDurationFactor.to!string()
+               ~ "\t=@[-2,]*"
+               ~ MaximumDurationFactor.to!string();
+
+        ++task_level;
+
+        while ( task_level < task_level_count)
+        {
+            line ~= "\t\t\t";
+            ++task_level;
+        }
+
+        line
+            ~= '\t'
+               ~ ( ( task.Developer !is null ) ? task.Developer.Name : "" )
+               ~ '\t'
+               ~ ( task.HasCompletion ? task.Completion.to!string() ~ '%' : "" )
+               ~ '\t'
+               ~ task.Status;
+
+        line_array ~= line;
+
+        foreach ( subtask; task.SubtaskArray )
+        {
+            WriteTaskPlanningSheetFile( line_array, subtask, task_level_count );
+        }
+    }
+
+    // ~~
+
+    void WriteTaskPlanningSheetFile(
+        string output_file_path
+        )
+    {
+        long
+            project_task_level_count,
+            task_level_count,
+            task_level_index;
+        string
+            line;
+        string[]
+            line_array;
+
+        line = "Phase\tSprint\tTask";
+
+        task_level_count = 0;
+
+        foreach ( project; ProjectArray )
+        {
+            project_task_level_count = project.Task.GetLevelCount();
+
+            if ( task_level_count < project_task_level_count )
+            {
+                task_level_count = project_task_level_count;
+            }
+        }
+
+        for ( task_level_index = 0;
+              task_level_index < task_level_count;
+              ++task_level_index )
+        {
+            line ~= "\tMinimum Days\tMedium Days\tMaximum Days";
+        }
+
+        line ~= "\tDeveloper\tCompletion\tStatus";
+
+        line_array ~= line;
+
+        foreach ( project; ProjectArray )
+        {
+            WriteTaskPlanningSheetFile( line_array, project.Task, task_level_count );
+        }
+
+        output_file_path.WriteLineArray( line_array, true );
+    }
+
+    // ~~
+
+    void WriteTaskPlanningFile(
+        ref string[] line_array,
+        TASK task
+        )
+    {
         line_array
             ~= ( ( task.Phase !is null ) ? task.Phase.Name : "" )
                ~ '\t'
                ~ ( ( task.Sprint !is null ) ? task.Sprint.Name : "" )
                ~ '\t'
-               ~ task_name
+               ~ GetTaskPlanningName( task )
                ~ '\t'
                ~ GetTripleDurationText( task.Duration )
                ~ '\t'
@@ -1897,6 +2037,7 @@ class PLANNING
     void WriteFiles(
         )
     {
+        WriteTaskPlanningSheetFile( OutputFolderPath ~ "task_planning_sheet.tsv" );
         WriteTaskPlanningFile( OutputFolderPath ~ "task_planning.tsv" );
         WriteDeveloperPlanningFile( OutputFolderPath ~ "developer_planning.tsv" );
         WriteProjectPlanningFile( OutputFolderPath ~ "project_planning.tsv" );
@@ -2219,14 +2360,180 @@ string ReadText(
 
 // ~~
 
+long GetInteger(
+    string text
+    )
+{
+    foreach ( character; text )
+    {
+        if ( character < '0'
+             || character > '9' )
+        {
+            PrintError( "Invalid cell index : " ~ text );
+
+            return 0;
+        }
+    }
+
+    return text.to!long();
+}
+
+// ~~
+
+long GetCellIndex(
+    long cell_index,
+    string cell_expression
+    )
+{
+    if ( cell_expression.startsWith( '-' ) )
+    {
+        if ( cell_expression.length > 1 )
+        {
+            cell_index -= cell_expression[ 1 .. $ ].GetInteger();
+        }
+    }
+    else if ( cell_expression.startsWith( '+' ) )
+    {
+        if ( cell_expression.length > 1 )
+        {
+            cell_index += cell_expression[ 1 .. $ ].GetInteger();
+        }
+    }
+    else if ( cell_expression.length > 0 )
+    {
+        cell_index = cell_expression.GetInteger();
+    }
+
+    return cell_index;
+}
+
+// ~~
+
+string GetColumnText(
+    long column_index,
+    string column_expression
+    )
+{
+    long
+        letter_index;
+    string
+        column_text;
+
+    column_index = GetCellIndex( column_index, column_expression );
+
+    do
+    {
+        letter_index = ( column_index % 26 );
+        column_text = cast(char)( 'A' + letter_index ) ~ column_text;
+        column_index /= 26;
+    }
+    while ( column_index > 0 );
+
+    return column_text;
+}
+
+// ~~
+
+string GetRowText(
+    long row_index,
+    string row_expression
+    )
+{
+    row_index = GetCellIndex( row_index, row_expression );
+
+    return ( row_index + 1 ).to!string();
+}
+
+// ~~
+
+string GetProcessedCell(
+    string cell,
+    long row_index,
+    long column_index
+    )
+{
+    long
+        bracket_character_index,
+        comma_character_index;
+    string[]
+        part_array;
+
+    part_array = cell.split( "@[" );
+
+    if ( part_array.length >= 2 )
+    {
+        foreach ( part_index, ref part; part_array )
+        {
+            if ( part_index > 0 )
+            {
+                comma_character_index = part.indexOf( ',' );
+                bracket_character_index = part.indexOf( ']' );
+
+                if ( comma_character_index >= 0
+                     && bracket_character_index >= 0
+                     && comma_character_index < bracket_character_index )
+                {
+                    part
+                        = GetColumnText( column_index, part[ 0 .. comma_character_index ] )
+                          ~ GetRowText( row_index, part[ comma_character_index + 1 .. bracket_character_index ] )
+                          ~ part[ bracket_character_index + 1 .. $ ];
+                }
+                else
+                {
+                    PrintError( "Invalid expression in cell : " ~ cell );
+                }
+            }
+        }
+
+        return part_array.join( "" );
+    }
+    else
+    {
+        return cell;
+    }
+}
+
+// ~~
+
+string[] GetProcessedLineArray(
+    string[] line_array
+    )
+{
+    string[]
+        cell_array,
+        processed_line_array;
+
+    foreach ( row_index, ref line; line_array )
+    {
+        cell_array = line.split( '\t' );
+
+        foreach ( column_index, ref cell; cell_array )
+        {
+            cell = GetProcessedCell( cell, row_index, column_index );
+        }
+
+        processed_line_array ~= cell_array.join( '\t' );
+    }
+
+    return processed_line_array;
+}
+
+// ~~
+
 void WriteLineArray(
     string output_file_path,
-    string[] line_array
+    string[] line_array,
+    bool lines_are_processed = false
     )
 {
     if ( line_array.length >= 2
          || output_file_path.exists() )
     {
+        if ( lines_are_processed )
+        {
+            line_array = GetProcessedLineArray( line_array );
+        }
+
         output_file_path.WriteText( line_array.join( '\n' ) );
     }
 }

@@ -1,148 +1,148 @@
 Project	Segment	Group	Task	Minimum Days	Medium Days	Maximum Days
-E-commerce Platform			  - Implement user authentication API	2	3	4
-E-commerce Platform			  - Set up payment gateway integration	1	1.5	2
-E-commerce Platform			  - Implement shopping cart functionality	2	3	4
-E-commerce Platform			  - Add order history tracking	1	1.5	2
-E-commerce Platform			  - Implement product recommendations	2	3	4
-E-commerce Platform			  - Add customer review system	1	1.5	2
-E-commerce Platform			  - Implement loyalty program	2	3	4
-E-commerce Platform			  - Add social commerce features	1	1.5	2
-E-commerce Platform			  - Implement marketplace integration	2	3	4
-E-commerce Platform			  - Add subscription management	1	1.5	2
-E-commerce Platform			  - Implement advanced payment methods	2	3	4
-E-commerce Platform			  - Add customer analytics dashboard	1	1.5	2
-Inventory Management System			  - Create product catalog API	0.25	0.375	0.5
-Inventory Management System			    - Build order processing service	2	3	4
-Inventory Management System			    - Implement stock tracking endpoints	1	1.5	2
-Inventory Management System			    - Design admin dashboard layout	0.125	0.1875	0.25
-Inventory Management System			    - Add product search functionality	2	3	4
-Inventory Management System			  - Build real-time inventory updates	1	1.5	2
-Inventory Management System			  - Create reporting dashboard	2	3	4
-Inventory Management System			  - Build automated reorder system	1	1.5	2
-Inventory Management System			  - Create supplier management	2	3	4
-Inventory Management System			  - Build demand forecasting	1	1.5	2
-Inventory Management System			  - Create quality control system	2	3	4
-Inventory Management System			  - Build vendor portal	2	3	4
-Inventory Management System			  - Create compliance tracking	1	1.5	2
-Inventory Management System			  - Implement inventory optimization	2	3	4
-Inventory Management System			  - Add barcode scanning system	1	1.5	2
-Mobile Banking App			  - Implement biometric login	2	3	4
-Mobile Banking App			  - Build transaction history API	1	1.5	2
-Mobile Banking App			  - Add money transfer functionality	2	3	4
-Mobile Banking App			  - Implement push notifications	1	1.5	2
-Mobile Banking App			  - Implement bill payment system	2	3	4
-Mobile Banking App			  - Add account aggregation	1	1.5	2
-Mobile Banking App			  - Implement investment portfolio	2	3	4
-Mobile Banking App			  - Add financial planning tools	1	1.5	2
-Mobile Banking App			  - Implement cryptocurrency trading	2	3	4
-Mobile Banking App			  - Add insurance products	1	1.5	2
-Mobile Banking App			  - Implement advanced security features	2	3	4
-Mobile Banking App			  - Add mobile wallet integration	1	1.5	2
-Financial Analytics Dashboard			  - Create expense categorization	1	1.5	2
-Financial Analytics Dashboard			  - Implement budget tracking features	2	3	4
-Financial Analytics Dashboard			  - Build spending trend analysis	1	1.5	2
-Financial Analytics Dashboard			  - Add investment tracking	2	3	4
-Financial Analytics Dashboard			  - Create financial goal tracking	1	1.5	2
-Financial Analytics Dashboard			  - Build credit score monitoring	2	3	4
-Financial Analytics Dashboard			  - Create tax optimization	1	1.5	2
-Financial Analytics Dashboard			  - Build retirement planning	2	3	4
-Financial Analytics Dashboard			  - Create estate planning	1	1.5	2
-Financial Analytics Dashboard			  - Build risk assessment	2	3	4
-Financial Analytics Dashboard			  - Implement financial forecasting	1	1.5	2
-Financial Analytics Dashboard			  - Add portfolio optimization	2	3	4
-Data Analytics Dashboard			  - Create interactive charts library	2	3	4
-Data Analytics Dashboard			  - Implement data filtering system	1	1.5	2
-Data Analytics Dashboard			  - Implement real-time data streaming	2	3	4
-Data Analytics Dashboard			  - Add advanced visualization options	1	1.5	2
-Data Analytics Dashboard			  - Implement predictive analytics	2	3	4
-Data Analytics Dashboard			  - Add custom dashboard builder	1	1.5	2
-Data Analytics Dashboard			  - Implement machine learning insights	2	3	4
-Data Analytics Dashboard			  - Add collaborative features	1	1.5	2
-Data Analytics Dashboard			  - Implement natural language queries	2	3	4
-Data Analytics Dashboard			  - Add mobile analytics	1	1.5	2
-Data Analytics Dashboard			  - Create advanced data modeling	2	3	4
-Data Analytics Dashboard			  - Implement automated insights	1	1.5	2
-Business Intelligence Platform			  - Build custom report builder	1	1.5	2
-Business Intelligence Platform			  - Add data export functionality	2	3	4
-Business Intelligence Platform			  - Create automated report scheduling	1	1.5	2
-Business Intelligence Platform			  - Build data source connectors	2	3	4
-Business Intelligence Platform			  - Create data governance framework	1	1.5	2
-Business Intelligence Platform			  - Build API for external integrations	2	3	4
-Business Intelligence Platform			  - Create data lineage tracking	1	1.5	2
-Business Intelligence Platform			  - Build compliance reporting	2	3	4
-Business Intelligence Platform			  - Create data marketplace	1	1.5	2
-Business Intelligence Platform			  - Build real-time collaboration	2	3	4
-Business Intelligence Platform			  - Implement data quality monitoring	1	1.5	2
-Business Intelligence Platform			  - Add advanced reporting templates	2	3	4
-Cloud Infrastructure			  - Set up Kubernetes cluster	2	3	4
-Cloud Infrastructure			  - Implement CI/CD pipeline	1	1.5	2
-Cloud Infrastructure			  - Implement auto-scaling policies	2	3	4
-Cloud Infrastructure			  - Add disaster recovery setup	1	1.5	2
-Cloud Infrastructure			  - Implement multi-region deployment	2	3	4
-Cloud Infrastructure			  - Add security compliance scanning	1	1.5	2
-Cloud Infrastructure			  - Implement zero-downtime deployments	2	3	4
-Cloud Infrastructure			  - Add cost optimization tools	1	1.5	2
-Cloud Infrastructure			  - Implement edge computing	2	3	4
-Cloud Infrastructure			  - Add blockchain integration	1	1.5	2
-Cloud Infrastructure			  - Create hybrid cloud management	2	3	4
-Cloud Infrastructure			  - Implement advanced networking	1	1.5	2
-DevOps Monitoring System			  - Configure application monitoring	1	1.5	2
-DevOps Monitoring System			  - Set up log aggregation	2	3	4
-DevOps Monitoring System			  - Build alerting system	1	1.5	2
-DevOps Monitoring System			  - Create performance dashboards	2	3	4
-DevOps Monitoring System			  - Build capacity planning tools	1	1.5	2
-DevOps Monitoring System			  - Create incident response automation	2	3	4
-DevOps Monitoring System			  - Build chaos engineering platform	1	1.5	2
-DevOps Monitoring System			  - Create security monitoring	2	3	4
-DevOps Monitoring System			  - Build AI-powered operations	1	1.5	2
-DevOps Monitoring System			  - Create predictive maintenance	2	3	4
-DevOps Monitoring System			  - Implement automated remediation	1	1.5	2
-DevOps Monitoring System			  - Add compliance monitoring	2	3	4
-AI Chatbot Service			  - Train NLP model for customer queries	2	3	4
-AI Chatbot Service			  - Implement conversation flow engine	1	1.5	2
-AI Chatbot Service			  - Add multi-language support	2	3	4
-AI Chatbot Service			  - Implement sentiment analysis	1	1.5	2
-AI Chatbot Service			  - Implement voice recognition	2	3	4
-AI Chatbot Service			  - Add personality customization	1	1.5	2
-AI Chatbot Service			  - Implement emotion detection	2	3	4
-AI Chatbot Service			  - Add conversation memory	1	1.5	2
-AI Chatbot Service			  - Implement context awareness	2	3	4
-AI Chatbot Service			  - Add proactive assistance	1	1.5	2
-AI Chatbot Service			  - Create advanced NLP models	2	3	4
-AI Chatbot Service			  - Implement conversation analytics	1	1.5	2
-Machine Learning Pipeline			  - Build data preprocessing service	1	1.5	2
-Machine Learning Pipeline			  - Create model training automation	2	3	4
-Machine Learning Pipeline			  - Build model versioning system	1	1.5	2
-Machine Learning Pipeline			  - Add A/B testing framework	2	3	4
-Machine Learning Pipeline			  - Create model performance monitoring	1	1.5	2
-Machine Learning Pipeline			  - Build feature engineering automation	2	3	4
-Machine Learning Pipeline			  - Create automated model selection	1	1.5	2
-Machine Learning Pipeline			  - Build data drift detection	2	3	4
-Machine Learning Pipeline			  - Create federated learning	1	1.5	2
-Machine Learning Pipeline			  - Build explainable AI	2	3	4
-Machine Learning Pipeline			  - Implement model optimization	1	1.5	2
-Machine Learning Pipeline			  - Add advanced ML algorithms	2	3	4
-Customer Support Portal			  - Create ticket management system	2	3	4
-Customer Support Portal			  - Implement live chat functionality	1	1.5	2
-Customer Support Portal			  - Add customer satisfaction surveys	2	3	4
-Customer Support Portal			  - Implement escalation workflows	1	1.5	2
-Customer Support Portal			  - Implement AI-powered ticket routing	2	3	4
-Customer Support Portal			  - Add video call integration	1	1.5	2
-Customer Support Portal			  - Implement omnichannel support	2	3	4
-Customer Support Portal			  - Add customer journey tracking	1	1.5	2
-Customer Support Portal			  - Implement predictive support	2	3	4
-Customer Support Portal			  - Add self-service automation	1	1.5	2
-Customer Support Portal			  - Create advanced analytics	2	3	4
-Customer Support Portal			  - Implement customer feedback system	1	1.5	2
-Knowledge Base Platform			  - Build article management system	1	1.5	2
-Knowledge Base Platform			  - Add search and categorization	2	3	4
-Knowledge Base Platform			  - Create content approval system	1	1.5	2
-Knowledge Base Platform			  - Add analytics tracking	2	3	4
-Knowledge Base Platform			  - Create content recommendation engine	1	1.5	2
-Knowledge Base Platform			  - Build multi-language support	2	3	4
-Knowledge Base Platform			  - Create content personalization	1	1.5	2
-Knowledge Base Platform			  - Build community features	2	3	4
-Knowledge Base Platform			  - Create content generation	1	1.5	2
-Knowledge Base Platform			  - Build gamification system	2	3	4
-Knowledge Base Platform			  - Implement advanced search	1	1.5	2
-Knowledge Base Platform			  - Add content collaboration tools	2	3	4
+E-commerce Platform			- Implement user authentication API	2	3	4
+E-commerce Platform			- Set up payment gateway integration	1	1.5	2
+E-commerce Platform			- Implement shopping cart functionality	2	3	4
+E-commerce Platform			- Add order history tracking	1	1.5	2
+E-commerce Platform			- Implement product recommendations	2	3	4
+E-commerce Platform			- Add customer review system	1	1.5	2
+E-commerce Platform			- Implement loyalty program	2	3	4
+E-commerce Platform			- Add social commerce features	1	1.5	2
+E-commerce Platform			- Implement marketplace integration	2	3	4
+E-commerce Platform			- Add subscription management	1	1.5	2
+E-commerce Platform			- Implement advanced payment methods	2	3	4
+E-commerce Platform			- Add customer analytics dashboard	1	1.5	2
+Inventory Management System			- Create product catalog API	0.25	0.375	0.5
+Inventory Management System			  - Build order processing service	2	3	4
+Inventory Management System			  - Implement stock tracking endpoints	1	1.5	2
+Inventory Management System			  - Design admin dashboard layout	0.125	0.1875	0.25
+Inventory Management System			  - Add product search functionality	2	3	4
+Inventory Management System			- Build real-time inventory updates	1	1.5	2
+Inventory Management System			- Create reporting dashboard	2	3	4
+Inventory Management System			- Build automated reorder system	1	1.5	2
+Inventory Management System			- Create supplier management	2	3	4
+Inventory Management System			- Build demand forecasting	1	1.5	2
+Inventory Management System			- Create quality control system	2	3	4
+Inventory Management System			- Build vendor portal	2	3	4
+Inventory Management System			- Create compliance tracking	1	1.5	2
+Inventory Management System			- Implement inventory optimization	2	3	4
+Inventory Management System			- Add barcode scanning system	1	1.5	2
+Mobile Banking App			- Implement biometric login	2	3	4
+Mobile Banking App			- Build transaction history API	1	1.5	2
+Mobile Banking App			- Add money transfer functionality	2	3	4
+Mobile Banking App			- Implement push notifications	1	1.5	2
+Mobile Banking App			- Implement bill payment system	2	3	4
+Mobile Banking App			- Add account aggregation	1	1.5	2
+Mobile Banking App			- Implement investment portfolio	2	3	4
+Mobile Banking App			- Add financial planning tools	1	1.5	2
+Mobile Banking App			- Implement cryptocurrency trading	2	3	4
+Mobile Banking App			- Add insurance products	1	1.5	2
+Mobile Banking App			- Implement advanced security features	2	3	4
+Mobile Banking App			- Add mobile wallet integration	1	1.5	2
+Financial Analytics Dashboard			- Create expense categorization	1	1.5	2
+Financial Analytics Dashboard			- Implement budget tracking features	2	3	4
+Financial Analytics Dashboard			- Build spending trend analysis	1	1.5	2
+Financial Analytics Dashboard			- Add investment tracking	2	3	4
+Financial Analytics Dashboard			- Create financial goal tracking	1	1.5	2
+Financial Analytics Dashboard			- Build credit score monitoring	2	3	4
+Financial Analytics Dashboard			- Create tax optimization	1	1.5	2
+Financial Analytics Dashboard			- Build retirement planning	2	3	4
+Financial Analytics Dashboard			- Create estate planning	1	1.5	2
+Financial Analytics Dashboard			- Build risk assessment	2	3	4
+Financial Analytics Dashboard			- Implement financial forecasting	1	1.5	2
+Financial Analytics Dashboard			- Add portfolio optimization	2	3	4
+Data Analytics Dashboard			- Create interactive charts library	2	3	4
+Data Analytics Dashboard			- Implement data filtering system	1	1.5	2
+Data Analytics Dashboard			- Implement real-time data streaming	2	3	4
+Data Analytics Dashboard			- Add advanced visualization options	1	1.5	2
+Data Analytics Dashboard			- Implement predictive analytics	2	3	4
+Data Analytics Dashboard			- Add custom dashboard builder	1	1.5	2
+Data Analytics Dashboard			- Implement machine learning insights	2	3	4
+Data Analytics Dashboard			- Add collaborative features	1	1.5	2
+Data Analytics Dashboard			- Implement natural language queries	2	3	4
+Data Analytics Dashboard			- Add mobile analytics	1	1.5	2
+Data Analytics Dashboard			- Create advanced data modeling	2	3	4
+Data Analytics Dashboard			- Implement automated insights	1	1.5	2
+Business Intelligence Platform			- Build custom report builder	1	1.5	2
+Business Intelligence Platform			- Add data export functionality	2	3	4
+Business Intelligence Platform			- Create automated report scheduling	1	1.5	2
+Business Intelligence Platform			- Build data source connectors	2	3	4
+Business Intelligence Platform			- Create data governance framework	1	1.5	2
+Business Intelligence Platform			- Build API for external integrations	2	3	4
+Business Intelligence Platform			- Create data lineage tracking	1	1.5	2
+Business Intelligence Platform			- Build compliance reporting	2	3	4
+Business Intelligence Platform			- Create data marketplace	1	1.5	2
+Business Intelligence Platform			- Build real-time collaboration	2	3	4
+Business Intelligence Platform			- Implement data quality monitoring	1	1.5	2
+Business Intelligence Platform			- Add advanced reporting templates	2	3	4
+Cloud Infrastructure			- Set up Kubernetes cluster	2	3	4
+Cloud Infrastructure			- Implement CI/CD pipeline	1	1.5	2
+Cloud Infrastructure			- Implement auto-scaling policies	2	3	4
+Cloud Infrastructure			- Add disaster recovery setup	1	1.5	2
+Cloud Infrastructure			- Implement multi-region deployment	2	3	4
+Cloud Infrastructure			- Add security compliance scanning	1	1.5	2
+Cloud Infrastructure			- Implement zero-downtime deployments	2	3	4
+Cloud Infrastructure			- Add cost optimization tools	1	1.5	2
+Cloud Infrastructure			- Implement edge computing	2	3	4
+Cloud Infrastructure			- Add blockchain integration	1	1.5	2
+Cloud Infrastructure			- Create hybrid cloud management	2	3	4
+Cloud Infrastructure			- Implement advanced networking	1	1.5	2
+DevOps Monitoring System			- Configure application monitoring	1	1.5	2
+DevOps Monitoring System			- Set up log aggregation	2	3	4
+DevOps Monitoring System			- Build alerting system	1	1.5	2
+DevOps Monitoring System			- Create performance dashboards	2	3	4
+DevOps Monitoring System			- Build capacity planning tools	1	1.5	2
+DevOps Monitoring System			- Create incident response automation	2	3	4
+DevOps Monitoring System			- Build chaos engineering platform	1	1.5	2
+DevOps Monitoring System			- Create security monitoring	2	3	4
+DevOps Monitoring System			- Build AI-powered operations	1	1.5	2
+DevOps Monitoring System			- Create predictive maintenance	2	3	4
+DevOps Monitoring System			- Implement automated remediation	1	1.5	2
+DevOps Monitoring System			- Add compliance monitoring	2	3	4
+AI Chatbot Service			- Train NLP model for customer queries	2	3	4
+AI Chatbot Service			- Implement conversation flow engine	1	1.5	2
+AI Chatbot Service			- Add multi-language support	2	3	4
+AI Chatbot Service			- Implement sentiment analysis	1	1.5	2
+AI Chatbot Service			- Implement voice recognition	2	3	4
+AI Chatbot Service			- Add personality customization	1	1.5	2
+AI Chatbot Service			- Implement emotion detection	2	3	4
+AI Chatbot Service			- Add conversation memory	1	1.5	2
+AI Chatbot Service			- Implement context awareness	2	3	4
+AI Chatbot Service			- Add proactive assistance	1	1.5	2
+AI Chatbot Service			- Create advanced NLP models	2	3	4
+AI Chatbot Service			- Implement conversation analytics	1	1.5	2
+Machine Learning Pipeline			- Build data preprocessing service	1	1.5	2
+Machine Learning Pipeline			- Create model training automation	2	3	4
+Machine Learning Pipeline			- Build model versioning system	1	1.5	2
+Machine Learning Pipeline			- Add A/B testing framework	2	3	4
+Machine Learning Pipeline			- Create model performance monitoring	1	1.5	2
+Machine Learning Pipeline			- Build feature engineering automation	2	3	4
+Machine Learning Pipeline			- Create automated model selection	1	1.5	2
+Machine Learning Pipeline			- Build data drift detection	2	3	4
+Machine Learning Pipeline			- Create federated learning	1	1.5	2
+Machine Learning Pipeline			- Build explainable AI	2	3	4
+Machine Learning Pipeline			- Implement model optimization	1	1.5	2
+Machine Learning Pipeline			- Add advanced ML algorithms	2	3	4
+Customer Support Portal			- Create ticket management system	2	3	4
+Customer Support Portal			- Implement live chat functionality	1	1.5	2
+Customer Support Portal			- Add customer satisfaction surveys	2	3	4
+Customer Support Portal			- Implement escalation workflows	1	1.5	2
+Customer Support Portal			- Implement AI-powered ticket routing	2	3	4
+Customer Support Portal			- Add video call integration	1	1.5	2
+Customer Support Portal			- Implement omnichannel support	2	3	4
+Customer Support Portal			- Add customer journey tracking	1	1.5	2
+Customer Support Portal			- Implement predictive support	2	3	4
+Customer Support Portal			- Add self-service automation	1	1.5	2
+Customer Support Portal			- Create advanced analytics	2	3	4
+Customer Support Portal			- Implement customer feedback system	1	1.5	2
+Knowledge Base Platform			- Build article management system	1	1.5	2
+Knowledge Base Platform			- Add search and categorization	2	3	4
+Knowledge Base Platform			- Create content approval system	1	1.5	2
+Knowledge Base Platform			- Add analytics tracking	2	3	4
+Knowledge Base Platform			- Create content recommendation engine	1	1.5	2
+Knowledge Base Platform			- Build multi-language support	2	3	4
+Knowledge Base Platform			- Create content personalization	1	1.5	2
+Knowledge Base Platform			- Build community features	2	3	4
+Knowledge Base Platform			- Create content generation	1	1.5	2
+Knowledge Base Platform			- Build gamification system	2	3	4
+Knowledge Base Platform			- Implement advanced search	1	1.5	2
+Knowledge Base Platform			- Add content collaboration tools	2	3	4

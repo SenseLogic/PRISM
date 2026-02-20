@@ -1,162 +1,162 @@
 Phase	Sprint	Task	Minimum Days	Medium Days	Maximum Days	Developer	Completion	Status
 		E-commerce Platform	18	27	36			
-1		  - Implement user authentication API	2	3	4	John	100%	done
-1	1	  - Set up payment gateway integration	1	1.5	2	John	80%	
-1	1	  - Implement shopping cart functionality	2	3	4	John		
-1	1	  - Add order history tracking	1	1.5	2	John		
-1	2	  - Implement product recommendations	2	3	4	John		
-1	2	  - Add customer review system	1	1.5	2	John		
-1	3	  - Implement loyalty program	2	3	4	John		
-1	3	  - Add social commerce features	1	1.5	2	John		
-2		  - Implement marketplace integration	2	3	4	John		
-2		  - Add subscription management	1	1.5	2	John		
-2		  - Implement advanced payment methods	2	3	4	John		
-2		  - Add customer analytics dashboard	1	1.5	2	John		
+1		- Implement user authentication API	2	3	4	John	100%	done
+1	1	- Set up payment gateway integration	1	1.5	2	John	80%	
+1	1	- Implement shopping cart functionality	2	3	4	John		
+1	1	- Add order history tracking	1	1.5	2	John		
+1	2	- Implement product recommendations	2	3	4	John		
+1	2	- Add customer review system	1	1.5	2	John		
+1	3	- Implement loyalty program	2	3	4	John		
+1	3	- Add social commerce features	1	1.5	2	John		
+2		- Implement marketplace integration	2	3	4	John		
+2		- Add subscription management	1	1.5	2	John		
+2		- Implement advanced payment methods	2	3	4	John		
+2		- Add customer analytics dashboard	1	1.5	2	John		
 		Inventory Management System	20.375	30.5625	40.75			
-1		  - Create product catalog API	0.25	0.375	0.5	John	100%	
-		  - Backend	3	4.5	6			
-1		    - Build order processing service	2	3	4	John	100%	
-1		    - Implement stock tracking endpoints	1	1.5	2	John	100%	
-		  - Frontend	2.125	3.1875	4.25			
-1		    - Design admin dashboard layout	0.125	0.1875	0.25	John	100%	
-1		    - Add product search functionality	2	3	4	John	100%	
-1	1	  - Build real-time inventory updates	1	1.5	2	John		
-1	1	  - Create reporting dashboard	2	3	4	John		
-1	2	  - Build automated reorder system	1	1.5	2	John		
-1	2	  - Create supplier management	2	3	4	John		
-1	3	  - Build demand forecasting	1	1.5	2	John		
-1	3	  - Create quality control system	2	3	4	John		
-2		  - Build vendor portal	2	3	4	John		
-2		  - Create compliance tracking	1	1.5	2	John		
-2		  - Implement inventory optimization	2	3	4	John		
-2		  - Add barcode scanning system	1	1.5	2	John		
+1		- Create product catalog API	0.25	0.375	0.5	John	100%	
+		- Backend	3	4.5	6			
+1		  - Build order processing service	2	3	4	John	100%	
+1		  - Implement stock tracking endpoints	1	1.5	2	John	100%	
+		- Frontend	2.125	3.1875	4.25			
+1		  - Design admin dashboard layout	0.125	0.1875	0.25	John	100%	
+1		  - Add product search functionality	2	3	4	John	100%	
+1	1	- Build real-time inventory updates	1	1.5	2	John		
+1	1	- Create reporting dashboard	2	3	4	John		
+1	2	- Build automated reorder system	1	1.5	2	John		
+1	2	- Create supplier management	2	3	4	John		
+1	3	- Build demand forecasting	1	1.5	2	John		
+1	3	- Create quality control system	2	3	4	John		
+2		- Build vendor portal	2	3	4	John		
+2		- Create compliance tracking	1	1.5	2	John		
+2		- Implement inventory optimization	2	3	4	John		
+2		- Add barcode scanning system	1	1.5	2	John		
 		Mobile Banking App	18	27	36			
-1		  - Implement biometric login	2	3	4	Mike	100%	
-1		  - Build transaction history API	1	1.5	2	Mike	100%	
-1	1	  - Add money transfer functionality	2	3	4	Mike		
-1	1	  - Implement push notifications	1	1.5	2	Mike		
-1	2	  - Implement bill payment system	2	3	4	Mike		
-1	2	  - Add account aggregation	1	1.5	2	Mike		
-1	3	  - Implement investment portfolio	2	3	4	Mike		
-1	3	  - Add financial planning tools	1	1.5	2	Mike		
-2		  - Implement cryptocurrency trading	2	3	4	Mike		
-2		  - Add insurance products	1	1.5	2	Mike		
-2		  - Implement advanced security features	2	3	4	Mike		
-2		  - Add mobile wallet integration	1	1.5	2	Mike		
+1		- Implement biometric login	2	3	4	Mike	100%	
+1		- Build transaction history API	1	1.5	2	Mike	100%	
+1	1	- Add money transfer functionality	2	3	4	Mike		
+1	1	- Implement push notifications	1	1.5	2	Mike		
+1	2	- Implement bill payment system	2	3	4	Mike		
+1	2	- Add account aggregation	1	1.5	2	Mike		
+1	3	- Implement investment portfolio	2	3	4	Mike		
+1	3	- Add financial planning tools	1	1.5	2	Mike		
+2		- Implement cryptocurrency trading	2	3	4	Mike		
+2		- Add insurance products	1	1.5	2	Mike		
+2		- Implement advanced security features	2	3	4	Mike		
+2		- Add mobile wallet integration	1	1.5	2	Mike		
 		Financial Analytics Dashboard	18	27	36			
-1		  - Create expense categorization	1	1.5	2	Mike	100%	
-1		  - Implement budget tracking features	2	3	4	Mike	100%	
-1	1	  - Build spending trend analysis	1	1.5	2	Mike		
-1	1	  - Add investment tracking	2	3	4	Mike		
-1	2	  - Create financial goal tracking	1	1.5	2	Mike		
-1	2	  - Build credit score monitoring	2	3	4	Mike		
-1	3	  - Create tax optimization	1	1.5	2	Mike		
-1	3	  - Build retirement planning	2	3	4	Mike		
-2		  - Create estate planning	1	1.5	2	Mike		
-2		  - Build risk assessment	2	3	4	Mike		
-2		  - Implement financial forecasting	1	1.5	2	Mike		
-2		  - Add portfolio optimization	2	3	4	Mike		
+1		- Create expense categorization	1	1.5	2	Mike	100%	
+1		- Implement budget tracking features	2	3	4	Mike	100%	
+1	1	- Build spending trend analysis	1	1.5	2	Mike		
+1	1	- Add investment tracking	2	3	4	Mike		
+1	2	- Create financial goal tracking	1	1.5	2	Mike		
+1	2	- Build credit score monitoring	2	3	4	Mike		
+1	3	- Create tax optimization	1	1.5	2	Mike		
+1	3	- Build retirement planning	2	3	4	Mike		
+2		- Create estate planning	1	1.5	2	Mike		
+2		- Build risk assessment	2	3	4	Mike		
+2		- Implement financial forecasting	1	1.5	2	Mike		
+2		- Add portfolio optimization	2	3	4	Mike		
 		Data Analytics Dashboard	18	27	36			
-1		  - Create interactive charts library	2	3	4	Jack	100%	
-1		  - Implement data filtering system	1	1.5	2	Jack	100%	
-1	1	  - Implement real-time data streaming	2	3	4	Jack		
-1	1	  - Add advanced visualization options	1	1.5	2	Jack		
-1	2	  - Implement predictive analytics	2	3	4	Jack		
-1	2	  - Add custom dashboard builder	1	1.5	2	Jack		
-1	3	  - Implement machine learning insights	2	3	4	Jack		
-1	3	  - Add collaborative features	1	1.5	2	Jack		
-2		  - Implement natural language queries	2	3	4	Jack		
-2		  - Add mobile analytics	1	1.5	2	Jack		
-2		  - Create advanced data modeling	2	3	4	Jack		
-2		  - Implement automated insights	1	1.5	2	Jack		
+1		- Create interactive charts library	2	3	4	Jack	100%	
+1		- Implement data filtering system	1	1.5	2	Jack	100%	
+1	1	- Implement real-time data streaming	2	3	4	Jack		
+1	1	- Add advanced visualization options	1	1.5	2	Jack		
+1	2	- Implement predictive analytics	2	3	4	Jack		
+1	2	- Add custom dashboard builder	1	1.5	2	Jack		
+1	3	- Implement machine learning insights	2	3	4	Jack		
+1	3	- Add collaborative features	1	1.5	2	Jack		
+2		- Implement natural language queries	2	3	4	Jack		
+2		- Add mobile analytics	1	1.5	2	Jack		
+2		- Create advanced data modeling	2	3	4	Jack		
+2		- Implement automated insights	1	1.5	2	Jack		
 		Business Intelligence Platform	18	27	36			
-1		  - Build custom report builder	1	1.5	2	Jack	100%	
-1		  - Add data export functionality	2	3	4	Jack	100%	
-1	1	  - Create automated report scheduling	1	1.5	2	Jack		
-1	1	  - Build data source connectors	2	3	4	Jack		
-1	2	  - Create data governance framework	1	1.5	2	Jack		
-1	2	  - Build API for external integrations	2	3	4	Jack		
-1	3	  - Create data lineage tracking	1	1.5	2	Jack		
-1	3	  - Build compliance reporting	2	3	4	Jack		
-2		  - Create data marketplace	1	1.5	2	Jack		
-2		  - Build real-time collaboration	2	3	4	Jack		
-2		  - Implement data quality monitoring	1	1.5	2	Jack		
-2		  - Add advanced reporting templates	2	3	4	Jack		
+1		- Build custom report builder	1	1.5	2	Jack	100%	
+1		- Add data export functionality	2	3	4	Jack	100%	
+1	1	- Create automated report scheduling	1	1.5	2	Jack		
+1	1	- Build data source connectors	2	3	4	Jack		
+1	2	- Create data governance framework	1	1.5	2	Jack		
+1	2	- Build API for external integrations	2	3	4	Jack		
+1	3	- Create data lineage tracking	1	1.5	2	Jack		
+1	3	- Build compliance reporting	2	3	4	Jack		
+2		- Create data marketplace	1	1.5	2	Jack		
+2		- Build real-time collaboration	2	3	4	Jack		
+2		- Implement data quality monitoring	1	1.5	2	Jack		
+2		- Add advanced reporting templates	2	3	4	Jack		
 		Cloud Infrastructure	18	27	36			
-1		  - Set up Kubernetes cluster	2	3	4	Mark	100%	
-1		  - Implement CI/CD pipeline	1	1.5	2	Mark	100%	
-1	1	  - Implement auto-scaling policies	2	3	4	Mark		
-1	1	  - Add disaster recovery setup	1	1.5	2	Mark		
-1	2	  - Implement multi-region deployment	2	3	4	Mark		
-1	2	  - Add security compliance scanning	1	1.5	2	Mark		
-1	3	  - Implement zero-downtime deployments	2	3	4	Mark		
-1	3	  - Add cost optimization tools	1	1.5	2	Mark		
-2		  - Implement edge computing	2	3	4	Mark		
-2		  - Add blockchain integration	1	1.5	2	Mark		
-2		  - Create hybrid cloud management	2	3	4	Mark		
-2		  - Implement advanced networking	1	1.5	2	Mark		
+1		- Set up Kubernetes cluster	2	3	4	Mark	100%	
+1		- Implement CI/CD pipeline	1	1.5	2	Mark	100%	
+1	1	- Implement auto-scaling policies	2	3	4	Mark		
+1	1	- Add disaster recovery setup	1	1.5	2	Mark		
+1	2	- Implement multi-region deployment	2	3	4	Mark		
+1	2	- Add security compliance scanning	1	1.5	2	Mark		
+1	3	- Implement zero-downtime deployments	2	3	4	Mark		
+1	3	- Add cost optimization tools	1	1.5	2	Mark		
+2		- Implement edge computing	2	3	4	Mark		
+2		- Add blockchain integration	1	1.5	2	Mark		
+2		- Create hybrid cloud management	2	3	4	Mark		
+2		- Implement advanced networking	1	1.5	2	Mark		
 		DevOps Monitoring System	18	27	36			
-1		  - Configure application monitoring	1	1.5	2	Mark	100%	
-1		  - Set up log aggregation	2	3	4	Mark	100%	
-1	1	  - Build alerting system	1	1.5	2	Mark		
-1	1	  - Create performance dashboards	2	3	4	Mark		
-1	2	  - Build capacity planning tools	1	1.5	2	Mark		
-1	2	  - Create incident response automation	2	3	4	Mark		
-1	3	  - Build chaos engineering platform	1	1.5	2	Mark		
-1	3	  - Create security monitoring	2	3	4	Mark		
-2		  - Build AI-powered operations	1	1.5	2	Mark		
-2		  - Create predictive maintenance	2	3	4	Mark		
-2		  - Implement automated remediation	1	1.5	2	Mark		
-2		  - Add compliance monitoring	2	3	4	Mark		
+1		- Configure application monitoring	1	1.5	2	Mark	100%	
+1		- Set up log aggregation	2	3	4	Mark	100%	
+1	1	- Build alerting system	1	1.5	2	Mark		
+1	1	- Create performance dashboards	2	3	4	Mark		
+1	2	- Build capacity planning tools	1	1.5	2	Mark		
+1	2	- Create incident response automation	2	3	4	Mark		
+1	3	- Build chaos engineering platform	1	1.5	2	Mark		
+1	3	- Create security monitoring	2	3	4	Mark		
+2		- Build AI-powered operations	1	1.5	2	Mark		
+2		- Create predictive maintenance	2	3	4	Mark		
+2		- Implement automated remediation	1	1.5	2	Mark		
+2		- Add compliance monitoring	2	3	4	Mark		
 		AI Chatbot Service	18	27	36			
-1		  - Train NLP model for customer queries	2	3	4	Paul	100%	
-1		  - Implement conversation flow engine	1	1.5	2	Paul	100%	
-1	1	  - Add multi-language support	2	3	4	Paul		
-1	1	  - Implement sentiment analysis	1	1.5	2	Paul		
-1	2	  - Implement voice recognition	2	3	4	Paul		
-1	2	  - Add personality customization	1	1.5	2	Paul		
-1	3	  - Implement emotion detection	2	3	4	Paul		
-1	3	  - Add conversation memory	1	1.5	2	Paul		
-2		  - Implement context awareness	2	3	4	Paul		
-2		  - Add proactive assistance	1	1.5	2	Paul		
-2		  - Create advanced NLP models	2	3	4	Paul		
-2		  - Implement conversation analytics	1	1.5	2	Paul		
+1		- Train NLP model for customer queries	2	3	4	Paul	100%	
+1		- Implement conversation flow engine	1	1.5	2	Paul	100%	
+1	1	- Add multi-language support	2	3	4	Paul		
+1	1	- Implement sentiment analysis	1	1.5	2	Paul		
+1	2	- Implement voice recognition	2	3	4	Paul		
+1	2	- Add personality customization	1	1.5	2	Paul		
+1	3	- Implement emotion detection	2	3	4	Paul		
+1	3	- Add conversation memory	1	1.5	2	Paul		
+2		- Implement context awareness	2	3	4	Paul		
+2		- Add proactive assistance	1	1.5	2	Paul		
+2		- Create advanced NLP models	2	3	4	Paul		
+2		- Implement conversation analytics	1	1.5	2	Paul		
 		Machine Learning Pipeline	18	27	36			
-1		  - Build data preprocessing service	1	1.5	2	Paul	100%	
-1		  - Create model training automation	2	3	4	Paul	100%	
-1	1	  - Build model versioning system	1	1.5	2	Paul		
-1	1	  - Add A/B testing framework	2	3	4	Paul		
-1	2	  - Create model performance monitoring	1	1.5	2	Paul		
-1	2	  - Build feature engineering automation	2	3	4	Paul		
-1	3	  - Create automated model selection	1	1.5	2	Paul		
-1	3	  - Build data drift detection	2	3	4	Paul		
-2		  - Create federated learning	1	1.5	2	Paul		
-2		  - Build explainable AI	2	3	4	Paul		
-2		  - Implement model optimization	1	1.5	2	Paul		
-2		  - Add advanced ML algorithms	2	3	4	Paul		
+1		- Build data preprocessing service	1	1.5	2	Paul	100%	
+1		- Create model training automation	2	3	4	Paul	100%	
+1	1	- Build model versioning system	1	1.5	2	Paul		
+1	1	- Add A/B testing framework	2	3	4	Paul		
+1	2	- Create model performance monitoring	1	1.5	2	Paul		
+1	2	- Build feature engineering automation	2	3	4	Paul		
+1	3	- Create automated model selection	1	1.5	2	Paul		
+1	3	- Build data drift detection	2	3	4	Paul		
+2		- Create federated learning	1	1.5	2	Paul		
+2		- Build explainable AI	2	3	4	Paul		
+2		- Implement model optimization	1	1.5	2	Paul		
+2		- Add advanced ML algorithms	2	3	4	Paul		
 		Customer Support Portal	18	27	36			
-1		  - Create ticket management system	2	3	4	Luke	100%	
-1		  - Implement live chat functionality	1	1.5	2	Luke	100%	
-1	1	  - Add customer satisfaction surveys	2	3	4	Luke		
-1	1	  - Implement escalation workflows	1	1.5	2	Luke		
-1	2	  - Implement AI-powered ticket routing	2	3	4	Luke		
-1	2	  - Add video call integration	1	1.5	2	Luke		
-1	3	  - Implement omnichannel support	2	3	4	Luke		
-1	3	  - Add customer journey tracking	1	1.5	2	Luke		
-2		  - Implement predictive support	2	3	4	Luke		
-2		  - Add self-service automation	1	1.5	2	Luke		
-2		  - Create advanced analytics	2	3	4	Luke		
-2		  - Implement customer feedback system	1	1.5	2	Luke		
+1		- Create ticket management system	2	3	4	Luke	100%	
+1		- Implement live chat functionality	1	1.5	2	Luke	100%	
+1	1	- Add customer satisfaction surveys	2	3	4	Luke		
+1	1	- Implement escalation workflows	1	1.5	2	Luke		
+1	2	- Implement AI-powered ticket routing	2	3	4	Luke		
+1	2	- Add video call integration	1	1.5	2	Luke		
+1	3	- Implement omnichannel support	2	3	4	Luke		
+1	3	- Add customer journey tracking	1	1.5	2	Luke		
+2		- Implement predictive support	2	3	4	Luke		
+2		- Add self-service automation	1	1.5	2	Luke		
+2		- Create advanced analytics	2	3	4	Luke		
+2		- Implement customer feedback system	1	1.5	2	Luke		
 		Knowledge Base Platform	18	27	36			
-1		  - Build article management system	1	1.5	2	Luke	100%	
-1		  - Add search and categorization	2	3	4	Luke	100%	
-1	1	  - Create content approval system	1	1.5	2	Luke		
-1	1	  - Add analytics tracking	2	3	4	Luke		
-1	2	  - Create content recommendation engine	1	1.5	2	Luke		
-1	2	  - Build multi-language support	2	3	4	Luke		
-1	3	  - Create content personalization	1	1.5	2	Luke		
-1	3	  - Build community features	2	3	4	Luke		
-2		  - Create content generation	1	1.5	2	Luke		
-2		  - Build gamification system	2	3	4	Luke		
-2		  - Implement advanced search	1	1.5	2	Luke		
-2		  - Add content collaboration tools	2	3	4	Luke		
+1		- Build article management system	1	1.5	2	Luke	100%	
+1		- Add search and categorization	2	3	4	Luke	100%	
+1	1	- Create content approval system	1	1.5	2	Luke		
+1	1	- Add analytics tracking	2	3	4	Luke		
+1	2	- Create content recommendation engine	1	1.5	2	Luke		
+1	2	- Build multi-language support	2	3	4	Luke		
+1	3	- Create content personalization	1	1.5	2	Luke		
+1	3	- Build community features	2	3	4	Luke		
+2		- Create content generation	1	1.5	2	Luke		
+2		- Build gamification system	2	3	4	Luke		
+2		- Implement advanced search	1	1.5	2	Luke		
+2		- Add content collaboration tools	2	3	4	Luke		

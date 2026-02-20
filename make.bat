@@ -1,2 +1,2 @@
 dmd -m64 prism.d
-del *.obj
+del /q *.obj

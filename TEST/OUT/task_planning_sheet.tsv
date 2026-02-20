@@ -1,0 +1,162 @@
+Phase	Sprint	Task	Minimum Days	Medium Days	Maximum Days	Minimum Days	Medium Days	Maximum Days	Minimum Days	Medium Days	Maximum Days	Developer	Completion	Status
+		E-commerce Platform	=SUM(G3:G14)	=D2*1.5	=D2*2									
+1		- Implement user authentication API				2	=G3*1.5	=G3*2				John	100%	done
+1	1	- Set up payment gateway integration				1	=G4*1.5	=G4*2				John	80%	
+1	1	- Implement shopping cart functionality				2	=G5*1.5	=G5*2				John		
+1	1	- Add order history tracking				1	=G6*1.5	=G6*2				John		
+1	2	- Implement product recommendations				2	=G7*1.5	=G7*2				John		
+1	2	- Add customer review system				1	=G8*1.5	=G8*2				John		
+1	3	- Implement loyalty program				2	=G9*1.5	=G9*2				John		
+1	3	- Add social commerce features				1	=G10*1.5	=G10*2				John		
+2		- Implement marketplace integration				2	=G11*1.5	=G11*2				John		
+2		- Add subscription management				1	=G12*1.5	=G12*2				John		
+2		- Implement advanced payment methods				2	=G13*1.5	=G13*2				John		
+2		- Add customer analytics dashboard				1	=G14*1.5	=G14*2				John		
+		Inventory Management System	=SUM(G16:G32)	=D15*1.5	=D15*2									
+1		- Create product catalog API				0.25	=G16*1.5	=G16*2				John	100%	
+		- Backend				=SUM(J18:J19)	=G17*1.5	=G17*2						
+1		  - Build order processing service							2	=J18*1.5	=J18*2	John	100%	
+1		  - Implement stock tracking endpoints							1	=J19*1.5	=J19*2	John	100%	
+		- Frontend				=SUM(J21:J22)	=G20*1.5	=G20*2						
+1		  - Design admin dashboard layout							0.125	=J21*1.5	=J21*2	John	100%	
+1		  - Add product search functionality							2	=J22*1.5	=J22*2	John	100%	
+1	1	- Build real-time inventory updates				1	=G23*1.5	=G23*2				John		
+1	1	- Create reporting dashboard				2	=G24*1.5	=G24*2				John		
+1	2	- Build automated reorder system				1	=G25*1.5	=G25*2				John		
+1	2	- Create supplier management				2	=G26*1.5	=G26*2				John		
+1	3	- Build demand forecasting				1	=G27*1.5	=G27*2				John		
+1	3	- Create quality control system				2	=G28*1.5	=G28*2				John		
+2		- Build vendor portal				2	=G29*1.5	=G29*2				John		
+2		- Create compliance tracking				1	=G30*1.5	=G30*2				John		
+2		- Implement inventory optimization				2	=G31*1.5	=G31*2				John		
+2		- Add barcode scanning system				1	=G32*1.5	=G32*2				John		
+		Mobile Banking App	=SUM(G34:G45)	=D33*1.5	=D33*2									
+1		- Implement biometric login				2	=G34*1.5	=G34*2				Mike	100%	
+1		- Build transaction history API				1	=G35*1.5	=G35*2				Mike	100%	
+1	1	- Add money transfer functionality				2	=G36*1.5	=G36*2				Mike		
+1	1	- Implement push notifications				1	=G37*1.5	=G37*2				Mike		
+1	2	- Implement bill payment system				2	=G38*1.5	=G38*2				Mike		
+1	2	- Add account aggregation				1	=G39*1.5	=G39*2				Mike		
+1	3	- Implement investment portfolio				2	=G40*1.5	=G40*2				Mike		
+1	3	- Add financial planning tools				1	=G41*1.5	=G41*2				Mike		
+2		- Implement cryptocurrency trading				2	=G42*1.5	=G42*2				Mike		
+2		- Add insurance products				1	=G43*1.5	=G43*2				Mike		
+2		- Implement advanced security features				2	=G44*1.5	=G44*2				Mike		
+2		- Add mobile wallet integration				1	=G45*1.5	=G45*2				Mike		
+		Financial Analytics Dashboard	=SUM(G47:G58)	=D46*1.5	=D46*2									
+1		- Create expense categorization				1	=G47*1.5	=G47*2				Mike	100%	
+1		- Implement budget tracking features				2	=G48*1.5	=G48*2				Mike	100%	
+1	1	- Build spending trend analysis				1	=G49*1.5	=G49*2				Mike		
+1	1	- Add investment tracking				2	=G50*1.5	=G50*2				Mike		
+1	2	- Create financial goal tracking				1	=G51*1.5	=G51*2				Mike		
+1	2	- Build credit score monitoring				2	=G52*1.5	=G52*2				Mike		
+1	3	- Create tax optimization				1	=G53*1.5	=G53*2				Mike		
+1	3	- Build retirement planning				2	=G54*1.5	=G54*2				Mike		
+2		- Create estate planning				1	=G55*1.5	=G55*2				Mike		
+2		- Build risk assessment				2	=G56*1.5	=G56*2				Mike		
+2		- Implement financial forecasting				1	=G57*1.5	=G57*2				Mike		
+2		- Add portfolio optimization				2	=G58*1.5	=G58*2				Mike		
+		Data Analytics Dashboard	=SUM(G60:G71)	=D59*1.5	=D59*2									
+1		- Create interactive charts library				2	=G60*1.5	=G60*2				Jack	100%	
+1		- Implement data filtering system				1	=G61*1.5	=G61*2				Jack	100%	
+1	1	- Implement real-time data streaming				2	=G62*1.5	=G62*2				Jack		
+1	1	- Add advanced visualization options				1	=G63*1.5	=G63*2				Jack		
+1	2	- Implement predictive analytics				2	=G64*1.5	=G64*2				Jack		
+1	2	- Add custom dashboard builder				1	=G65*1.5	=G65*2				Jack		
+1	3	- Implement machine learning insights				2	=G66*1.5	=G66*2				Jack		
+1	3	- Add collaborative features				1	=G67*1.5	=G67*2				Jack		
+2		- Implement natural language queries				2	=G68*1.5	=G68*2				Jack		
+2		- Add mobile analytics				1	=G69*1.5	=G69*2				Jack		
+2		- Create advanced data modeling				2	=G70*1.5	=G70*2				Jack		
+2		- Implement automated insights				1	=G71*1.5	=G71*2				Jack		
+		Business Intelligence Platform	=SUM(G73:G84)	=D72*1.5	=D72*2									
+1		- Build custom report builder				1	=G73*1.5	=G73*2				Jack	100%	
+1		- Add data export functionality				2	=G74*1.5	=G74*2				Jack	100%	
+1	1	- Create automated report scheduling				1	=G75*1.5	=G75*2				Jack		
+1	1	- Build data source connectors				2	=G76*1.5	=G76*2				Jack		
+1	2	- Create data governance framework				1	=G77*1.5	=G77*2				Jack		
+1	2	- Build API for external integrations				2	=G78*1.5	=G78*2				Jack		
+1	3	- Create data lineage tracking				1	=G79*1.5	=G79*2				Jack		
+1	3	- Build compliance reporting				2	=G80*1.5	=G80*2				Jack		
+2		- Create data marketplace				1	=G81*1.5	=G81*2				Jack		
+2		- Build real-time collaboration				2	=G82*1.5	=G82*2				Jack		
+2		- Implement data quality monitoring				1	=G83*1.5	=G83*2				Jack		
+2		- Add advanced reporting templates				2	=G84*1.5	=G84*2				Jack		
+		Cloud Infrastructure	=SUM(G86:G97)	=D85*1.5	=D85*2									
+1		- Set up Kubernetes cluster				2	=G86*1.5	=G86*2				Mark	100%	
+1		- Implement CI/CD pipeline				1	=G87*1.5	=G87*2				Mark	100%	
+1	1	- Implement auto-scaling policies				2	=G88*1.5	=G88*2				Mark		
+1	1	- Add disaster recovery setup				1	=G89*1.5	=G89*2				Mark		
+1	2	- Implement multi-region deployment				2	=G90*1.5	=G90*2				Mark		
+1	2	- Add security compliance scanning				1	=G91*1.5	=G91*2				Mark		
+1	3	- Implement zero-downtime deployments				2	=G92*1.5	=G92*2				Mark		
+1	3	- Add cost optimization tools				1	=G93*1.5	=G93*2				Mark		
+2		- Implement edge computing				2	=G94*1.5	=G94*2				Mark		
+2		- Add blockchain integration				1	=G95*1.5	=G95*2				Mark		
+2		- Create hybrid cloud management				2	=G96*1.5	=G96*2				Mark		
+2		- Implement advanced networking				1	=G97*1.5	=G97*2				Mark		
+		DevOps Monitoring System	=SUM(G99:G110)	=D98*1.5	=D98*2									
+1		- Configure application monitoring				1	=G99*1.5	=G99*2				Mark	100%	
+1		- Set up log aggregation				2	=G100*1.5	=G100*2				Mark	100%	
+1	1	- Build alerting system				1	=G101*1.5	=G101*2				Mark		
+1	1	- Create performance dashboards				2	=G102*1.5	=G102*2				Mark		
+1	2	- Build capacity planning tools				1	=G103*1.5	=G103*2				Mark		
+1	2	- Create incident response automation				2	=G104*1.5	=G104*2				Mark		
+1	3	- Build chaos engineering platform				1	=G105*1.5	=G105*2				Mark		
+1	3	- Create security monitoring				2	=G106*1.5	=G106*2				Mark		
+2		- Build AI-powered operations				1	=G107*1.5	=G107*2				Mark		
+2		- Create predictive maintenance				2	=G108*1.5	=G108*2				Mark		
+2		- Implement automated remediation				1	=G109*1.5	=G109*2				Mark		
+2		- Add compliance monitoring				2	=G110*1.5	=G110*2				Mark		
+		AI Chatbot Service	=SUM(G112:G123)	=D111*1.5	=D111*2									
+1		- Train NLP model for customer queries				2	=G112*1.5	=G112*2				Paul	100%	
+1		- Implement conversation flow engine				1	=G113*1.5	=G113*2				Paul	100%	
+1	1	- Add multi-language support				2	=G114*1.5	=G114*2				Paul		
+1	1	- Implement sentiment analysis				1	=G115*1.5	=G115*2				Paul		
+1	2	- Implement voice recognition				2	=G116*1.5	=G116*2				Paul		
+1	2	- Add personality customization				1	=G117*1.5	=G117*2				Paul		
+1	3	- Implement emotion detection				2	=G118*1.5	=G118*2				Paul		
+1	3	- Add conversation memory				1	=G119*1.5	=G119*2				Paul		
+2		- Implement context awareness				2	=G120*1.5	=G120*2				Paul		
+2		- Add proactive assistance				1	=G121*1.5	=G121*2				Paul		
+2		- Create advanced NLP models				2	=G122*1.5	=G122*2				Paul		
+2		- Implement conversation analytics				1	=G123*1.5	=G123*2				Paul		
+		Machine Learning Pipeline	=SUM(G125:G136)	=D124*1.5	=D124*2									
+1		- Build data preprocessing service				1	=G125*1.5	=G125*2				Paul	100%	
+1		- Create model training automation				2	=G126*1.5	=G126*2				Paul	100%	
+1	1	- Build model versioning system				1	=G127*1.5	=G127*2				Paul		
+1	1	- Add A/B testing framework				2	=G128*1.5	=G128*2				Paul		
+1	2	- Create model performance monitoring				1	=G129*1.5	=G129*2				Paul		
+1	2	- Build feature engineering automation				2	=G130*1.5	=G130*2				Paul		
+1	3	- Create automated model selection				1	=G131*1.5	=G131*2				Paul		
+1	3	- Build data drift detection				2	=G132*1.5	=G132*2				Paul		
+2		- Create federated learning				1	=G133*1.5	=G133*2				Paul		
+2		- Build explainable AI				2	=G134*1.5	=G134*2				Paul		
+2		- Implement model optimization				1	=G135*1.5	=G135*2				Paul		
+2		- Add advanced ML algorithms				2	=G136*1.5	=G136*2				Paul		
+		Customer Support Portal	=SUM(G138:G149)	=D137*1.5	=D137*2									
+1		- Create ticket management system				2	=G138*1.5	=G138*2				Luke	100%	
+1		- Implement live chat functionality				1	=G139*1.5	=G139*2				Luke	100%	
+1	1	- Add customer satisfaction surveys				2	=G140*1.5	=G140*2				Luke		
+1	1	- Implement escalation workflows				1	=G141*1.5	=G141*2				Luke		
+1	2	- Implement AI-powered ticket routing				2	=G142*1.5	=G142*2				Luke		
+1	2	- Add video call integration				1	=G143*1.5	=G143*2				Luke		
+1	3	- Implement omnichannel support				2	=G144*1.5	=G144*2				Luke		
+1	3	- Add customer journey tracking				1	=G145*1.5	=G145*2				Luke		
+2		- Implement predictive support				2	=G146*1.5	=G146*2				Luke		
+2		- Add self-service automation				1	=G147*1.5	=G147*2				Luke		
+2		- Create advanced analytics				2	=G148*1.5	=G148*2				Luke		
+2		- Implement customer feedback system				1	=G149*1.5	=G149*2				Luke		
+		Knowledge Base Platform	=SUM(G151:G162)	=D150*1.5	=D150*2									
+1		- Build article management system				1	=G151*1.5	=G151*2				Luke	100%	
+1		- Add search and categorization				2	=G152*1.5	=G152*2				Luke	100%	
+1	1	- Create content approval system				1	=G153*1.5	=G153*2				Luke		
+1	1	- Add analytics tracking				2	=G154*1.5	=G154*2				Luke		
+1	2	- Create content recommendation engine				1	=G155*1.5	=G155*2				Luke		
+1	2	- Build multi-language support				2	=G156*1.5	=G156*2				Luke		
+1	3	- Create content personalization				1	=G157*1.5	=G157*2				Luke		
+1	3	- Build community features				2	=G158*1.5	=G158*2				Luke		
+2		- Create content generation				1	=G159*1.5	=G159*2				Luke		
+2		- Build gamification system				2	=G160*1.5	=G160*2				Luke		
+2		- Implement advanced search				1	=G161*1.5	=G161*2				Luke		
+2		- Add content collaboration tools				2	=G162*1.5	=G162*2				Luke		
