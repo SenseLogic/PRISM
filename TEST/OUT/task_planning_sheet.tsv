@@ -160,3 +160,5 @@ Phase	Sprint	Task	Minimum Days	Medium Days	Maximum Days	Minimum Days	Medium Days
 2		- Build gamification system				2	=G160*1.5	=G160*2				Luke		
 2		- Implement advanced search				1	=G161*1.5	=G161*2				Luke		
 2		- Add content collaboration tools				2	=G162*1.5	=G162*2				Luke		
+
+		Total	=SUM(D2:D162)	=SUM(E2:E162)	=SUM(F2:F162)

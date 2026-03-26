@@ -154,9 +154,16 @@ prism {workday duration} {minimum duration factor} {medium duration factor} {max
 prism 8h 1 1.5 2 INPUT_FOLDER/ OUTPUT_FOLDER/
 ```
 
+## LibreOffice Calc TSV import
+
+- Character set : Unicode (UTF-8)
+- Separated by : Tab
+- String delimiter : "
+- Evaluate formulas : ☑️
+
 ## Limitations
 
-- Backlog and sprint tasks are currently independent.
+- Backlog and sprint tasks are independent.
 
 ## Version
 

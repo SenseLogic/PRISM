@@ -1706,6 +1706,12 @@ class PLANNING
             WriteTaskPlanningSheetFile( line_array, project.Task, task_level_count );
         }
 
+        if ( line_array.length > 1 )
+        {
+            line_array ~= "";
+            line_array ~= "\t\tTotal\t=SUM(@[,1]:@[,-2])\t=SUM(@[,1]:@[,-2])\t=SUM(@[,1]:@[,-2])";
+        }
+
         output_file_path.WriteLineArray( line_array, true );
     }
 
