@@ -163,6 +163,7 @@ prism 8h 1 1.5 2 INPUT_FOLDER/ OUTPUT_FOLDER/
 
 ## Limitations
 
+- Colons and square brackets must be escaped inside task names.
 - Backlog and sprint tasks are independent.
 
 ## Version

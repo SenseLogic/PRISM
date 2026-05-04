@@ -623,18 +623,18 @@ class TRACKING
                         }
 
                         if ( line.startsWith( '-' )
-                             && line.endsWith( ':' ) )
+                             && line.HasSuffix( ':' ) )
                         {
                             segment_name = line[ 1 .. $ - 1 ].strip();
                         }
                         else if ( line.startsWith( "  -" )
-                                  && line.endsWith( ':' ) )
+                                  && line.HasSuffix( ':' ) )
                         {
                             group_name = line[ 3 .. $ - 1 ].strip();
                         }
-                        else if ( line.endsWith( ']' ) )
+                        else if ( line.HasSuffix( ']' ) )
                         {
-                            bracket_character_index = trimmed_line.lastIndexOf( '[' );
+                            bracket_character_index = trimmed_line.GetLastCharacterIndex( '[' );
 
                             if ( bracket_character_index >= 0 )
                             {
@@ -1249,7 +1249,7 @@ class PLANNING
                     }
                 }
 
-                part_array = trimmed_line.split( ':' );
+                part_array = trimmed_line.Split( ':' );
 
                 if ( part_array.length == 1 )
                 {
@@ -1278,13 +1278,13 @@ class PLANNING
                     Abort( "Invalid task", line, line_index );
                 }
 
-                if ( task_text.endsWith( ']' ) )
+                if ( task_text.HasSuffix( ']' ) )
                 {
-                    bracket_character_index = task_text.lastIndexOf( '[' );
+                    bracket_character_index = task_text.GetLastCharacterIndex( '[' );
 
                     if ( bracket_character_index >= 0 )
                     {
-                        task.Name = task_text[ 0 .. bracket_character_index ].strip();
+                        task.Name = task_text[ 0 .. bracket_character_index ].Escape().strip();
                         part_array = task_text[ bracket_character_index + 1 .. $ - 1 ].strip().split( ' ' );
 
                         foreach ( part; part_array )
@@ -1366,7 +1366,7 @@ class PLANNING
                 }
                 else
                 {
-                    task.Name = task_text;
+                    task.Name = task_text.Escape();
                 }
 
                 task.Project = project;
@@ -2171,6 +2171,131 @@ bool IsPositiveReal(
     )
 {
     return !text.matchFirst( PositiveRealRegularExpression ).empty;
+}
+
+// ~~
+
+string Escape(
+    string text
+    )
+{
+    char
+        character;
+    long
+        character_index;
+    string
+        escaped_text;
+
+    for ( character_index = 0;
+          character_index < text.length;
+          ++character_index )
+    {
+        character = text[ character_index ];
+
+        if ( character == '\\' )
+        {
+            if ( character_index + 1 < text.length )
+            {
+                ++character_index;
+
+                escaped_text ~= text[ character_index ];
+            }
+            else
+            {
+                escaped_text ~= '\\';
+            }
+        }
+        else
+        {
+            escaped_text ~= character;
+        }
+    }
+
+    return escaped_text;
+}
+
+// ~~
+
+string[] Split(
+    string text,
+    char separator
+    )
+{
+    char
+        character;
+    long
+        character_index;
+    string[]
+        text_array;
+
+    text_array = [ "" ];
+
+    for ( character_index = 0;
+          character_index < text.length;
+          ++character_index )
+    {
+        character = text[ character_index ];
+
+        if ( character == separator )
+        {
+            text_array ~= "";
+        }
+        else
+        {
+            text_array[ $ - 1 ] ~= character;
+
+            if ( character == '\\'
+                 && character_index + 1 < text.length )
+            {
+                ++character_index;
+
+                text_array[ $ - 1 ] ~= text[ character_index ];
+            }
+        }
+    }
+
+    return text_array;
+}
+
+// ~~
+
+long GetLastCharacterIndex(
+    string text,
+    char character
+    )
+{
+    long
+        character_index,
+        last_character_index;
+
+    last_character_index = -1;
+
+    for ( character_index = 0;
+          character_index < text.length;
+          ++character_index )
+    {
+        if ( text[ character_index ] == character )
+        {
+            last_character_index = character_index;
+        }
+
+        if ( text[ character_index ] == '\\' )
+        {
+            ++character_index;
+        }
+    }
+
+    return last_character_index;
+}
+
+// ~~
+
+long HasSuffix(
+    string text,
+    char character
+    )
+{
+    return GetLastCharacterIndex( text, character ) + 1 == text.length;
 }
 
 // ~~
