@@ -1,3 +1,2 @@
-@echo off
-cd /d "%~dp0.."
-python upload_task_planning.py "..\..\TEST\OUT\task_planning.tsv" --board-id 0 --dry-run
+rem set MONDAY_API_TOKEN=...
+python ../monday_sync.py "../../../TEST/OUT/" 5095507480 "Backlog" %1
