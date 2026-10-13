@@ -2092,7 +2092,7 @@ Regex!char
     PositiveIntegerRegularExpression = regex( r"^\d+$" ),
     PositiveRealRegularExpression = regex( r"^\d+\.?\d*$" ),
     MinuteDurationRegularExpression = regex( r"^\d+m$" ),
-    HourDurationRegularExpression = regex( r"^\d+h$" ),
+    HourDurationRegularExpression = regex( r"^\d+\.?\d*h$" ),
     HourMinuteDurationRegularExpression = regex( r"^\d+h\d+$" ),
     DayDurationRegularExpression = regex( r"^\d+\.?\d*d$" ),
     DateRegularExpression = regex( r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" );
@@ -2698,7 +2698,7 @@ long GetDuration(
     }
     else if ( !text.matchFirst( HourDurationRegularExpression ).empty )
     {
-        return text[ 0 .. $ - 1 ].to!long() * 60;
+        return ( text[ 0 .. $ - 1 ].to!double() * 60 + 0.5 ).to!long();
     }
     else if ( !text.matchFirst( HourMinuteDurationRegularExpression ).empty )
     {

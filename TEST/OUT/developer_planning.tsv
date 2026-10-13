@@ -74,7 +74,7 @@ Luke	Knowledge Base Platform			- Create content generation	1	1.5	2
 Luke	Knowledge Base Platform			- Build gamification system	2	3	4
 Luke	Knowledge Base Platform			- Implement advanced search	1	1.5	2
 Luke	Knowledge Base Platform			- Add content collaboration tools	2	3	4
-Luke	Escaping			- Colon: [Brackets]	0.5	0.75	1
+Luke	Escaping			- Colon: [Brackets]	0.0625	0.09375	0.125
 Mark	Cloud Infrastructure			- Set up Kubernetes cluster	2	3	4
 Mark	Cloud Infrastructure			- Implement CI/CD pipeline	1	1.5	2
 Mark	Cloud Infrastructure			- Implement auto-scaling policies	2	3	4

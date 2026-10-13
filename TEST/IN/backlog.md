@@ -172,4 +172,4 @@ Knowledge Base Platform
 - Add content collaboration tools [Luke ~2] : 2d
 
 Escaping
-- Colon\: \[Brackets\] [Luke ~1 100%] : 0.5d
+- Colon\: \[Brackets\] [Luke ~1 100%] : 0.5h

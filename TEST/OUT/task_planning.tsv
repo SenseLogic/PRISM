@@ -160,5 +160,5 @@ Phase	Sprint	Task	Minimum Days	Medium Days	Maximum Days	Developer	Completion	Sta
 2		- Build gamification system	2	3	4	Luke		
 2		- Implement advanced search	1	1.5	2	Luke		
 2		- Add content collaboration tools	2	3	4	Luke		
-		Escaping	0.5	0.75	1			
-1		- Colon: [Brackets]	0.5	0.75	1	Luke	100%	
+		Escaping	0.0625	0.09375	0.125			
+1		- Colon: [Brackets]	0.0625	0.09375	0.125	Luke	100%	
